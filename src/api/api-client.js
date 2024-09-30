@@ -62,3 +62,15 @@ export const getAllReservationByUser = async () => {
   const reservations = await apiClient.get("/reservation/my/reservation");
   return reservations.data;
 };
+
+export const getOrder = async (orderId) => {
+  const res = await apiClient.get(`/order/${orderId}`)
+  return res.data
+} 
+
+export const createOrder = async (courseId) => {
+  const res = await apiClient.post('/order', {
+    courseId,
+  })
+  return res.data
+}
