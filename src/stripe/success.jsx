@@ -1,34 +1,23 @@
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import { fetchFromApi } from "../utils/helpers/stripe";
+import { useNavigate } from "react-router-dom";
+import { useCart } from "../contexts/сardContext"; // Импортируйте контекст
 
-function Success() {
-  const location = useLocation();
-  const [sessionId, setSessionId] = useState(null);
-  const [result, setResult] = useState(null);
+const SuccessPage = () => {
+  const navigate = useNavigate();
+  const { clearCart } = useCart(); // Получите функцию очистки корзины
 
-  useEffect(() => {
-    const queryParams = new URLSearchParams(location.search);
-    const sessionIdFromQS = queryParams.get("session_id");
-    setSessionId(sessionIdFromQS);
-    if (sessionIdFromQS) {
-      fetchFromApi("/order/payment-date", {
-        method: "put",
-        body: { sessionId: sessionIdFromQS },
-      }).then((data) => setResult(data));
-      console.log(result);
-    }
-  }, []);
+  const handleClearCart = () => {
+    clearCart(); // Очищаем корзину с помощью функции из контекста
+    navigate("/"); // Перенаправление на главную страницу
+  };
 
   return (
-    <div>
-      Success
-      <pre>
-        
-      {JSON.stringify(result, null, 2)}
-    </pre>
+    <div className="container">
+      <h2>Success!</h2>
+      <button className="button" onClick={handleClearCart}>
+        OK
+      </button>
     </div>
   );
-}
+};
 
-export default Success;
+export default SuccessPage;

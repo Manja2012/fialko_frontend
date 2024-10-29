@@ -1,23 +1,27 @@
-import { createContext, useState, useContext, useEffect } from 'react';
-import { logIn, register } from '../api/api-client'; 
-import axios from 'axios';
+import { createContext, useState, useContext, useEffect } from "react";
+import { logIn, register } from "../api/api-client";
+import axios from "axios";
+
 const UserContext = createContext();
 
-export const UserProvider = ({ children }) => {
+export const UserProvider = ({ children, clearCart }) => {
+  // добавляем clearCart как пропс
   const [user, setUser] = useState(null);
 
   useEffect(() => {
- 
     const getUser = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/api/user/current/get', {
-          withCredentials: true,
-        });
+        const response = await axios.get(
+          "http://localhost:3001/api/user/current/get",
+          {
+            withCredentials: true,
+          }
+        );
         const userData = response.data;
         console.log(userData);
         setUser(userData);
       } catch (error) {
-        console.error('error', error);
+        console.error("error", error);
       }
     };
 
@@ -27,13 +31,13 @@ export const UserProvider = ({ children }) => {
   const login = async (email, password) => {
     const userData = await logIn(email, password);
     setUser(userData);
-
     return userData;
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
+    clearCart(); // Очищаем корзину при выходе
   };
 
   const registerUser = async (userData) => {

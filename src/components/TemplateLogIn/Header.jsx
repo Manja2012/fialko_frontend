@@ -1,14 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Logo from "../../images/logo.svg";
 import { GrClose } from "react-icons/gr";
 import { GrMenu } from "react-icons/gr";
 import { FaShoppingBasket } from "react-icons/fa";
 import LogoutButton from "../LogoutButton/LogoutButton";
+import { useCart } from "../../contexts/сardContext";
 import style from "../Template/Header.module.scss";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [setCartCount] = useState(0);
+  const { cartCount } = useCart();
 
   const handleIsOpen = () => {
     setIsOpen(!isOpen);
@@ -94,8 +97,13 @@ const Header = () => {
           </nav>
         </div>
         <ul className={`${style.nav} ${style.nav__margin}`}>
-          <Link to="/panier"  className={style.basket_link}>
-            <FaShoppingBasket className={style.basket_icon} size={30} />
+          <Link to="/panier" className={style.basket_link}>
+            <div className={style.basket_icon_container}>
+              <FaShoppingBasket className={style.basket_icon} size={30} />
+              {cartCount > 0 && (
+                <span className={style.basket_counter}>{cartCount}</span>
+              )}
+            </div>
           </Link>
           <LogoutButton />
           <li className={style.nav__item_logIn}>
@@ -182,4 +190,5 @@ const Header = () => {
     </header>
   );
 };
+
 export default Header;

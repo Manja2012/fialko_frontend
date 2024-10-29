@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import {
   getCourseById,
   createReservation,
@@ -12,6 +11,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AddReview from "../AddReview/AddReview.jsx";
 import CourseCard from "./CourseCard.jsx";
+import { useCart } from "../../contexts/сardContext.jsx";
 
 const OneCourse = () => {
   const { id } = useParams();
@@ -20,6 +20,7 @@ const OneCourse = () => {
   const [isAgreed, setIsAgreed] = useState(false);
   const [hasReserved, setHasReserved] = useState(false);
   const { user } = useUser();
+  const { cart, addToCart } = useCart(); // Получаем cart из контекста
 
   useEffect(() => {
     fetchCourse();
@@ -30,9 +31,25 @@ const OneCourse = () => {
     toast.error(`Vous devez vous inscrire`, {
       className: style.errorMessage,
     });
+
   const confirmation = () =>
     toast.success(`Le cours a été ajouté avec succès au panier`, {
       className: style.successMessage,
+    });
+
+  const confirmationReservation = () =>
+    toast.success(`Le cours a été réservé`, {
+      className: style.successMessage,
+    });
+
+  const alreadyInCart = () =>
+    toast.error(`Ce cours est déjà dans le panier`, {
+      className: style.errorMessage,
+    });
+
+  const alreadyReserved = () =>
+    toast.error(`Vous avez déjà réservé ce cours`, {
+      className: style.errorMessage,
     });
 
   const fetchCourse = async () => {
@@ -54,18 +71,23 @@ const OneCourse = () => {
       }
     }
   };
-  function addToCart() {
-    const courses = JSON.parse(localStorage.getItem("cart")) ?? [];
+
+  const addToCartHandler = () => {
     if (!user) {
       notify();
       return;
-    } else {
-      console.log(course);
-      courses.push(course);
-      confirmation();
-      localStorage.setItem("cart", JSON.stringify(courses));
     }
-  }
+
+    // Проверяем, добавлен ли курс в корзину
+    const isCourseInCart = cart.some((item) => item._id === course._id);
+
+    if (isCourseInCart) {
+      alreadyInCart(); // Уведомление, если курс уже в корзине
+    } else {
+      addToCart(course);
+      confirmation();
+    }
+  };
 
   const handleReservation = async () => {
     if (!isAgreed) {
@@ -78,12 +100,17 @@ const OneCourse = () => {
       return;
     }
 
+    if (hasReserved) {
+      alreadyReserved(); // Уведомление, если курс уже зарезервирован
+      return;
+    }
+
     try {
       await createReservation({
         user: user._id,
         course: id,
       });
-      confirmation();
+      confirmationReservation();
       setIsModalOpen(false);
       setHasReserved(true);
     } catch (error) {
@@ -97,7 +124,7 @@ const OneCourse = () => {
       ...prevCourse,
       review: [...prevCourse.review, newReview],
     }));
-    fetchReservationStatus(); // Met à jour l'état de la réservation après l'ajout d'un avis
+    fetchReservationStatus(); // Обновляем состояние после добавления отзыва
   };
 
   if (!course) {
@@ -117,29 +144,32 @@ const OneCourse = () => {
           price={course.price}
           showMore={false}
         />
+        <div>
+          <button className="button" onClick={() => setIsModalOpen(true)}>
+            Reserve
+          </button>
+          <button className="button" onClick={addToCartHandler}>
+            Ajouter au panier
+          </button>
+        </div>
 
         <h3 className={style.card__review}>Reviews</h3>
         <ul>
           {course.review.map((review, index) => (
             <li className={style.card__item} key={index}>
-              {review.comment}
-              {review.rating}
-              <Link
-                className={style.card__link}
-                to={`/update-reviews/${review._id}`}
-              >
-                modifier l'avis
-              </Link>
+              {review.comment} - {review.rating}
+              {user &&
+                user.isAdmin && ( // Условие для отображения ссылки
+                  <Link
+                    className={style.card__link}
+                    to={`/update-reviews/${review._id}`}
+                  >
+                    modifier l'avis
+                  </Link>
+                )}
             </li>
           ))}
         </ul>
-
-        <button className="button" onClick={() => setIsModalOpen(true)}>
-          Reserve
-        </button>
-        <button className="button" onClick={addToCart}>
-          Ajouter au panier
-        </button>
 
         {user && hasReserved && (
           <>
@@ -175,9 +205,7 @@ const OneCourse = () => {
             </div>
           </div>
         )}
-        {/* </div> */}
       </main>
-      {/* <CourseCard/> */}
     </>
   );
 };
