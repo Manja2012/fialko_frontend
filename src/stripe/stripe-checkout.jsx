@@ -27,7 +27,7 @@ const StripeCheckout = () => {
     });
     console.log("line_item", line_items);
     // CALL API
-    const { sessionId } = await fetchFromApi("create-checkout-session", {
+    const { sessionId } = await fetchFromApi("/stripe/create-checkout-session", {
       body: { line_items, customer_email: email },
     });
 

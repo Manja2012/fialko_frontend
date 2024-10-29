@@ -63,14 +63,22 @@ export const getAllReservationByUser = async () => {
   return reservations.data;
 };
 
-export const getOrder = async (orderId) => {
-  const res = await apiClient.get(`/order/${orderId}`)
-  return res.data
-} 
+// export const getOrder = async (orderId) => {
+//   const res = await apiClient.get(`/order/${orderId}`);
+//   return res.data;
+// };
 
-export const createOrder = async (courseId) => {
-  const res = await apiClient.post('/order', {
-    courseId,
-  })
-  return res.data
-}
+// export const createOrder = async (basket) => {
+//   const res = await apiClient.post("/order", { basket });
+//   return res.data;
+// };
+
+// export const checkPaymentStatus = async (sessionId) => {
+//   try {
+//     const response = await apiClient.put(`/order/payment-date`, { sessionId });
+//     return response.data;
+//   } catch (error) {
+//     console.error("Error checking payment status:", error);
+//     throw error;
+//   }
+// };
