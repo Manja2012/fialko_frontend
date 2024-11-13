@@ -10,7 +10,7 @@ const Courses = () => {
     const fetchCourses = async () => {
       try {
         const { data } = await getCourses();
-        console.log(data)
+        console.log(data);
         setCourses(data);
       } catch (error) {
         console.log(error);
@@ -21,7 +21,7 @@ const Courses = () => {
 
   return (
     <section className="container section">
-      <h2 className={style.card__title2}>nos cours</h2>
+      <h2 className={style.card__title2}>Nos cours</h2>
       <ul className={style.card__list}>
         {courses.map((card) => (
           <li className={style.card__item} key={card._id}>
@@ -32,7 +32,7 @@ const Courses = () => {
               category={card.category}
               picture={card.picture}
               price={card.price}
-              showMore={true}
+              showOverlay={true}
             />
           </li>
         ))}

@@ -1,6 +1,7 @@
 import { StrictMode, useState } from "react";
 import { sendMessage } from "../../api/api-client.js";
 import { ToastContainer, toast } from "react-toastify";
+import Img from "../../images/profil2.webp";
 import "react-toastify/dist/ReactToastify.css";
 import style from "./ContactsForm.module.scss";
 
@@ -98,6 +99,13 @@ const ContactsForm = () => {
               <button className={style.form__button}>Ok</button>
             </div>
           </form>
+        </div>
+        <div className={style.form__image}>
+          <img
+            className={style.form__photo}
+            src={Img}
+            alt="photo Maria Fialko"
+          />
         </div>
       </section>
       <ToastContainer position="bottom-center" theme="dark" />

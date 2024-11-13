@@ -19,7 +19,6 @@ export const logIn = async (email, password) => {
     email,
     password,
   });
-
   return user.data;
 };
 
@@ -32,18 +31,12 @@ export const addCourse = (course) =>
   apiClient.post(`${coursesRoute}/add`, course);
 
 export const deleteCourse = async (id) => {
-  const response = await apiClient.delete(`${coursesRoute}${id}`, {});
+  const response = await apiClient.delete(`${coursesRoute}${id}`);
   return response.data;
 };
 
-export const updateCourse = async (course, currentId) => {
-  const response = await apiClient.put(`${coursesRoute}${currentId}`, course);
-  return response.data;
-};
-
-export const createReservation = async (reservationData) => {
-  console.log(reservationData);
-  const response = await apiClient.post("/reservation/add", reservationData);
+export const updateCourse = async (course, id) => {
+  const response = await apiClient.put(`${coursesRoute}${id}`, course);
   return response.data;
 };
 
@@ -51,6 +44,11 @@ export const addReview = async (review) => {
   console.log(review);
   const res = await apiClient.post(`${reviewsRoute}/${review.course}`, review);
   return res;
+};
+
+export const getReviewsForCourse = async (courseId) => {
+  const response = await apiClient.get(`/review/course/${courseId}`);
+  return response.data;
 };
 
 export const checkReservation = async (courseId) => {
@@ -61,6 +59,16 @@ export const checkReservation = async (courseId) => {
 export const getAllReservationByUser = async () => {
   const reservations = await apiClient.get("/reservation/my/reservation");
   return reservations.data;
+};
+
+export const deleteReview = async (reviewId) => {
+  const response = await apiClient.delete(`/review/${reviewId}`);
+  return response.data;
+};
+
+export const updateReview = async (id, review) => {
+  const response = await apiClient.put(`/review/${id}`, review);
+  return response.data;
 };
 
 // export const getOrder = async (orderId) => {

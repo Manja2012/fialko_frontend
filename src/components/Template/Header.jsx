@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Logo from "../../images/logo.svg";
-import { GrClose } from "react-icons/gr";
-import { GrMenu } from "react-icons/gr";
+import { GrClose, GrMenu } from "react-icons/gr";
 import style from "./Header.module.scss";
 
 const Header = () => {
@@ -28,7 +27,7 @@ const Header = () => {
                   onClick={() => setIsOpen(false)}
                   className={({ isActive }) =>
                     isActive
-                      ? `${style.nav__link} ${style.nav__link_current})`
+                      ? `${style.nav__link} ${style.nav__link_current}`
                       : `${style.nav__link}`
                   }
                   to="/propos"
@@ -41,7 +40,7 @@ const Header = () => {
                   onClick={() => setIsOpen(false)}
                   className={({ isActive }) =>
                     isActive
-                      ? `${style.nav__link} ${style.nav__link_current})`
+                      ? `${style.nav__link} ${style.nav__link_current}`
                       : `${style.nav__link}`
                   }
                   to="/courses"
@@ -54,7 +53,7 @@ const Header = () => {
                   onClick={() => setIsOpen(false)}
                   className={({ isActive }) =>
                     isActive
-                      ? `${style.nav__link} ${style.nav__link_current})`
+                      ? `${style.nav__link} ${style.nav__link_current}`
                       : `${style.nav__link}`
                   }
                   to="/photos"
@@ -67,20 +66,7 @@ const Header = () => {
                   onClick={() => setIsOpen(false)}
                   className={({ isActive }) =>
                     isActive
-                      ? `${style.nav__link} ${style.nav__link_current})`
-                      : `${style.nav__link}`
-                  }
-                  to="faq"
-                >
-                  FAQ
-                </NavLink>
-              </li>
-              <li className="nav__item">
-                <NavLink
-                  onClick={() => setIsOpen(false)}
-                  className={({ isActive }) =>
-                    isActive
-                      ? `${style.nav__link} ${style.nav__link_current})`
+                      ? `${style.nav__link} ${style.nav__link_current}`
                       : `${style.nav__link}`
                   }
                   to="/contacts"
@@ -91,20 +77,33 @@ const Header = () => {
             </ul>
           </nav>
         </div>
-        <ul className={`${style.nav} ${style.nav__margin}`}>
+
+        {/* Логин и регистрация в десктопной версии */}
+        <ul
+          className={`${style.nav} ${style.nav__margin} ${style.desktop_only}`}
+        >
           <li className={style.nav__item_logIn}>
             <Link className={style.nav__link} to="/register">
-              {" "}
               s’inscrire |
             </Link>
           </li>
           <li className={style.nav__item_logIn}>
             <Link className={style.nav__link} to="/log-in">
-              {" "}
               se connecter
             </Link>
           </li>
         </ul>
+
+        {/* Логин и регистрация в мобильной версии */}
+        <div className={style.mobile_links}>
+          <Link className={style.nav__link} to="/register">
+            s’inscrire
+          </Link>
+          <Link className={style.nav__link} to="/log-in">
+            se connecter
+          </Link>
+        </div>
+
         <div
           className={`${style.mobil_menu} ${isOpen ? style.is_open : ""}`}
           id="mobil-menu"
@@ -142,15 +141,6 @@ const Header = () => {
               <NavLink
                 onClick={() => setIsOpen(false)}
                 className={style.link}
-                to="/faq"
-              >
-                FAQ
-              </NavLink>
-            </li>
-            <li className={style.nav__item}>
-              <NavLink
-                onClick={() => setIsOpen(false)}
-                className={style.link}
                 to="/contacts"
               >
                 Contacts
@@ -158,6 +148,7 @@ const Header = () => {
             </li>
           </ul>
         </div>
+
         <div className={style.mobil_header}>
           <button
             onClick={handleIsOpen}
@@ -176,8 +167,11 @@ const Header = () => {
           </button>
         </div>
       </div>
-      <h1 className={style.title}>École de coloriage <br/> en ligne par Maria Fialko</h1>
+      <h1 className={style.title}>
+        École de coloration <br /> en ligne par Maria Fialko
+      </h1>
     </header>
   );
 };
+
 export default Header;

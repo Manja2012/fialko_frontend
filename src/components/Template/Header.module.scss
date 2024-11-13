@@ -1,130 +1,141 @@
 .logo {
   margin-left: 12px;
   width: 80%;
-    @media screen and (min-width:768px){
-      width: 15%;
-      }
+  @media screen and (min-width: 768px) {
+    width: 15%;
   }
-  .header {
-    position: relative;
-    width: 100%;
-    height: 400px; 
-    background-image: url('/src/images/photo-bg-2.jpg');
-    background-size: cover;
-    background-position: center;
-  
-  }
-  .flex_logo{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .header__container {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    display: flex;
-    justify-content: space-between;
-    background-color: rgba(255, 255, 255, 0.5);
-   
 }
-  .mobil-header{
-    @media screen and (min-width:768px){
-     display: none;
-    }
-  }
-  .nav{
+.header {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  background-image: linear-gradient(
+      to right,
+      rgba(47, 48, 58, 0.4),
+      rgba(47, 48, 58, 0.4)
+    ),
+    url("/src//images/bg.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.flex_logo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header__container {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.mobil-header {
+  @media screen and (min-width: 768px) {
     display: none;
-      @media screen and (min-width:768px){
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      }
-      &__item_logIn{
-        font-size: 24px;
-      }
-      &__margin{
-  
-        @media screen and (min-width:768px){
-           margin-left:auto;
-           margin-right: 20px;
-        }
-      }
   }
-  .nav__link{
-    display: block;
-    // padding-top: 32px;
-    // margin-bottom: 16px;
-    // padding-bottom: 16px;
-    text-decoration: none;
-    font-family: "Bebas Neue", sans-serif;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 2.2;
-    letter-spacing: 0.02em;
-    color: var(--text-color);
-    list-style: none;
-    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  
-    &[aria-current=page] {
-      position: relative;
-      color: var(--accent-color);
-    }
-  
-    &:hover,
-    &:focus {
-      color: var(--accent-color);
-    }
-    @media screen and (min-width:768px){
-      font-size: 18px;
-      line-height: 40px;
-    }
-  }
-  .nav__item{
-    margin-right: 20px;
-    @media screen and (min-width:1200px){
-      margin-right: 50px;
-    }
-  }
-
-  .title{
-    margin-top: 100px;
-    text-align: center;
-    text-shadow: 4px 4px 4px #00000040;
-    color: var(--main-background-color);
-    font-weight: 500;
-    font-size: 40px;
-    @media screen and (min-width:768px) {
-        font-size: 70px;
-      }
-  }
-
-  .basket_link{
+}
+.nav {
+  display: none;
+  @media screen and (min-width: 768px) {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    // margin-bottom: 20px;
-    margin-right: 30px;
+  }
+  &__item_logIn {
+    font-size: 24px;
+    @media screen and (min-width: 768px) {
+      font-size: 14px;
+    }
+    @media screen and (min-width: 1200px) {
+      font-size: 18px;
+    }
+  }
+  &__margin {
+    @media screen and (min-width: 768px) {
+      margin-left: auto;
+      margin-right: 20px;
+    }
+  }
+}
+.nav__link {
+  display: block;
+  // padding-top: 32px;
+  // margin-bottom: 16px;
+  // padding-bottom: 16px;
+  text-decoration: none;
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  color: var(--text-color);
+  list-style: none;
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
-    width: 60px;
-    height: 60px;
-   
-    border-radius: 50%;
-   
+  &[aria-current="page"] {
+    position: relative;
+    color: var(--accent-color);
+  }
 
-    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+  &:hover,
+  &:focus {
+    color: var(--accent-color);
+  }
+  @media screen and (min-width: 768px) {
+    font-size: 16px;
+  }
+  @media screen and (min-width: 1200px) {
+    font-size: 20px;
+  }
+}
+.nav__item {
+  margin-right: 20px;
+  @media screen and (min-width: 1200px) {
+    margin-right: 50px;
+  }
+}
+
+.title {
+  margin-top: 70px;
+  text-align: center;
+  text-shadow: 4px 4px 4px #00000040;
+  color: var(--main-background-color);
+  font-weight: 500;
+  font-size: 40px;
+  @media screen and (min-width: 768px) {
+    font-size: 60px;
+  }
+}
+
+.basket_link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // margin-bottom: 20px;
+  margin-right: 30px;
+
+  width: 60px;
+  height: 60px;
+
+  border-radius: 50%;
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
     background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
-    &:hover,
-    &:focus {
-        background-color: var(--accent-color);
-        color: var(--text-footer-color);
-    }
+  &:hover,
+  &:focus {
+    background-color: var(--accent-color);
+    color: var(--text-footer-color);
   }
+}
 
-  .basket_icon{
-    fill: var(--main-background-color);
-    background-color: var(--background-footer-color);
-  }
+.basket_icon {
+  fill: var(--main-background-color);
+  background-color: var(--background-footer-color);
+}
 
 //Mobil menu
 
@@ -138,15 +149,16 @@
   transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .menu_button svg {
-  fill:black;
+  fill: black;
 }
-.menu_button:hover, .menu_button:focus {
+.menu_button:hover,
+.menu_button:focus {
   fill: var(--accent-color-hover);
 }
 
 .menu_button {
   @media screen and (min-width: 768px) {
-  display: none;
+    display: none;
   }
 }
 .menu_button.is_open {
@@ -163,7 +175,6 @@
 
 .menu_button.is_open .icon_close {
   display: block;
-  
 }
 
 .menu_button.is_open .icon_menu {
@@ -180,7 +191,7 @@
   z-index: 1;
   padding: 48px 40px;
   background-color: white;
-    @media screen and (min-width: 768px) {
+  @media screen and (min-width: 768px) {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -191,7 +202,7 @@
     clip-path: inset(100%);
     clip: rect(0 0 0 0);
     overflow: hidden;
-    }
+  }
 }
 
 .mobil_menu.is_open {
@@ -210,17 +221,22 @@
   color: var(--text-color);
   transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
-  &[aria-current=page] {
+  &[aria-current="page"] {
     position: relative;
     color: var(--accent-color);
   }
 }
-.link:hover, .link:focus {
+.link:hover,
+.link:focus {
   color: var(--accent-color);
 }
-
 .basket_icon_container {
   position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
 }
 
 .basket_counter {
@@ -230,6 +246,65 @@
   background-color: red;
   color: white;
   font-size: 12px;
+  font-weight: bold;
   border-radius: 50%;
   padding: 2px 6px;
+  min-width: 20px;
+  text-align: center;
+}
+
+.desktop_only {
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
+}
+
+.mobile_links {
+  display: flex;
+  gap: 10px;
+  margin-right: auto;
+
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
+}
+
+.header__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mobile_links {
+  display: block;
+
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
+}
+
+.mobile_links a {
+  display: inline-block;
+  padding: 5px 10px;
+  text-decoration: none;
+}
+
+.desktop_nav {
+  display: flex;
+}
+
+.mobil_header .mobile_icons {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .desktop_nav {
+    display: none;
+  }
+
+  .mobil_header .mobile_icons {
+    display: block;
+    align-items: center;
+    gap: 10px;
+  }
 }

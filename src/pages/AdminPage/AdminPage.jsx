@@ -11,13 +11,13 @@ const AdminPage = () => {
           </Link>
         </li>
         <li>
-          <Link className="button link" to="/update-course">
-            Supprimer un cours
+          <Link className="button link" to="/courses">
+            Supprimer/modifier le cours
           </Link>
         </li>
         <li>
-          <Link className="button link" to="/update-reviews">
-            modifier l'avis
+          <Link className="button link" to="/courses">
+            Supprimer/modifier l'avis
           </Link>
         </li>
       </ul>

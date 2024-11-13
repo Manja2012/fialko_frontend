@@ -20,19 +20,19 @@ const Footer = () => {
             </li>
             <li className={style.footer__item}>
               <Link className={style.footer__link} to="/courses">
-                cours
+                Cours
               </Link>
             </li>
             <li className={style.footer__item}>
               <Link className={style.footer__link} to="/photos">
-                photos
+                Photos
               </Link>
             </li>
-            <li className={style.footer__item}>
+            {/* <li className={style.footer__item}>
               <Link className={style.footer__link} to="/faq">
                 FAQ
               </Link>
-            </li>
+            </li> */}
             <li className={style.footer__item}>
               <Link className={style.footer__link} to="/contacts">
                 Contacts
@@ -40,7 +40,7 @@ const Footer = () => {
             </li>
             <li className={style.footer__item}>
               <Link className={style.footer__link} to="/mention-legales">
-                mention legales
+                Mention legales
               </Link>
             </li>
             <li className={style.footer__item}>

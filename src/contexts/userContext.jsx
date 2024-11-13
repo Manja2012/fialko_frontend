@@ -1,11 +1,12 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import { logIn, register } from "../api/api-client";
 import axios from "axios";
+import { useCart } from "./сardContext"; // Импортируем useCart
 
 const UserContext = createContext();
 
-export const UserProvider = ({ children, clearCart }) => {
-  // добавляем clearCart как пропс
+export const UserProvider = ({ children }) => {
+  const { clearCart } = useCart(); // Получаем clearCart из CartContext
   const [user, setUser] = useState(null);
 
   useEffect(() => {

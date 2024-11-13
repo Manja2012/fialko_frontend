@@ -18,7 +18,7 @@ import PaiementPage from "./pages/PaiementPage/PaiementPage.jsx";
 import PhotosPage from "./pages/PhotosPage/PhotosPages.jsx";
 import AddCourseForm from "./components/AddCourseForm/AddCourseForm.jsx";
 import UpdateCourse from "./components/UpdateCourse/UpdateCourse.jsx";
-// import UpdateReviews from './components/UpdateReviews/UpdateReviews.jsx'
+import UpdateReviews from './components/UpdateReviews/UpdateReviews.jsx'
 // import ReservationPage from './pages/ReservationPage/ReservationPage';
 
 function App() {
@@ -42,8 +42,8 @@ function App() {
           <Route path="/photos" element={<PhotosPage />} />
           {user.isAdmin && <Route path="/admin" element={<AdminPage />} />}
           <Route path="/add-course" element={<AddCourseForm />} />
-          <Route path="/update-course" element={<UpdateCourse />} />
-          {/* <Route path="/update-reviews/:id" element={<UpdateReviews />} /> */}
+          <Route path="/update-course/:id" element={<UpdateCourse />} />
+          <Route path="/update-reviews/:id" element={<UpdateReviews />} />
         </Route>
       ) : (
         <Route path="/" element={<Template />}>

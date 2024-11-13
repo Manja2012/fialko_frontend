@@ -1,8 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Logo from "../../images/logo.svg";
-import { GrClose } from "react-icons/gr";
-import { GrMenu } from "react-icons/gr";
+import { GrClose, GrMenu } from "react-icons/gr";
 import { FaShoppingBasket } from "react-icons/fa";
 import LogoutButton from "../LogoutButton/LogoutButton";
 import { useCart } from "../../contexts/сardContext";
@@ -10,7 +9,6 @@ import style from "../Template/Header.module.scss";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [setCartCount] = useState(0);
   const { cartCount } = useCart();
 
   const handleIsOpen = () => {
@@ -33,7 +31,7 @@ const Header = () => {
                   onClick={() => setIsOpen(false)}
                   className={({ isActive }) =>
                     isActive
-                      ? `${style.nav__link} ${style.nav__link_current})`
+                      ? `${style.nav__link} ${style.nav__link_current}`
                       : `${style.nav__link}`
                   }
                   to="/propos"
@@ -46,7 +44,7 @@ const Header = () => {
                   onClick={() => setIsOpen(false)}
                   className={({ isActive }) =>
                     isActive
-                      ? `${style.nav__link} ${style.nav__link_current})`
+                      ? `${style.nav__link} ${style.nav__link_current}`
                       : `${style.nav__link}`
                   }
                   to="/courses"
@@ -59,7 +57,7 @@ const Header = () => {
                   onClick={() => setIsOpen(false)}
                   className={({ isActive }) =>
                     isActive
-                      ? `${style.nav__link} ${style.nav__link_current})`
+                      ? `${style.nav__link} ${style.nav__link_current}`
                       : `${style.nav__link}`
                   }
                   to="/photos"
@@ -72,20 +70,7 @@ const Header = () => {
                   onClick={() => setIsOpen(false)}
                   className={({ isActive }) =>
                     isActive
-                      ? `${style.nav__link} ${style.nav__link_current})`
-                      : `${style.nav__link}`
-                  }
-                  to="faq"
-                >
-                  FAQ
-                </NavLink>
-              </li>
-              <li className={style.nav__item}>
-                <NavLink
-                  onClick={() => setIsOpen(false)}
-                  className={({ isActive }) =>
-                    isActive
-                      ? `${style.nav__link} ${style.nav__link_current})`
+                      ? `${style.nav__link} ${style.nav__link_current}`
                       : `${style.nav__link}`
                   }
                   to="/contacts"
@@ -96,7 +81,9 @@ const Header = () => {
             </ul>
           </nav>
         </div>
-        <ul className={`${style.nav} ${style.nav__margin}`}>
+        <ul
+          className={`${style.nav} ${style.nav__margin} ${style.desktop_nav}`}
+        >
           <Link to="/panier" className={style.basket_link}>
             <div className={style.basket_icon_container}>
               <FaShoppingBasket className={style.basket_icon} size={30} />
@@ -108,65 +95,26 @@ const Header = () => {
           <LogoutButton />
           <li className={style.nav__item_logIn}>
             <Link className={style.nav__link} to="/profile">
-              {" "}
               Mon compte
             </Link>
           </li>
         </ul>
-        <div
-          className={`${style.mobil_menu} ${isOpen ? style.is_open : ""}`}
-          id="mobil-menu"
-          data-menu
-        >
-          <ul className={style.mobil_menu__nav}>
-            <li className={style.nav__item}>
-              <NavLink
-                onClick={() => setIsOpen(false)}
-                className={style.link}
-                to="/propos"
-              >
-                A propos de moi
-              </NavLink>
-            </li>
-            <li className={style.nav__item}>
-              <NavLink
-                onClick={() => setIsOpen(false)}
-                className={style.link}
-                to="/courses"
-              >
-                Cours
-              </NavLink>
-            </li>
-            <li className={style.nav__item}>
-              <NavLink
-                onClick={() => setIsOpen(false)}
-                className={style.link}
-                to="/photos"
-              >
-                Photos
-              </NavLink>
-            </li>
-            <li className={style.nav__item}>
-              <NavLink
-                onClick={() => setIsOpen(false)}
-                className={style.link}
-                to="/faq"
-              >
-                FAQ
-              </NavLink>
-            </li>
-            <li className={style.nav__item}>
-              <NavLink
-                onClick={() => setIsOpen(false)}
-                className={style.link}
-                to="/contacts"
-              >
-                Contacts
-              </NavLink>
-            </li>
-          </ul>
-        </div>
+
         <div className={style.mobil_header}>
+          <div className={style.mobile_icons}>
+            <Link to="/panier" className={style.basket_link}>
+              <div className={style.basket_icon_container}>
+                <FaShoppingBasket className={style.basket_icon} size={30} />
+                {cartCount > 0 && (
+                  <span className={style.basket_counter}>{cartCount}</span>
+                )}
+              </div>
+            </Link>
+            <LogoutButton />
+            <Link className={style.nav__link} to="/profile">
+              Mon compte
+            </Link>
+          </div>
           <button
             onClick={handleIsOpen}
             className={`${style.menu_button} ${isOpen ? style.is_open : ""}`}
@@ -184,8 +132,52 @@ const Header = () => {
           </button>
         </div>
       </div>
+      <div
+        className={`${style.mobil_menu} ${isOpen ? style.is_open : ""}`}
+        id="mobil-menu"
+        data-menu
+      >
+        <ul className={style.mobil_menu__nav}>
+          <li className={style.nav__item}>
+            <NavLink
+              onClick={() => setIsOpen(false)}
+              className={style.link}
+              to="/propos"
+            >
+              A propos de moi
+            </NavLink>
+          </li>
+          <li className={style.nav__item}>
+            <NavLink
+              onClick={() => setIsOpen(false)}
+              className={style.link}
+              to="/courses"
+            >
+              Cours
+            </NavLink>
+          </li>
+          <li className={style.nav__item}>
+            <NavLink
+              onClick={() => setIsOpen(false)}
+              className={style.link}
+              to="/photos"
+            >
+              Photos
+            </NavLink>
+          </li>
+          <li className={style.nav__item}>
+            <NavLink
+              onClick={() => setIsOpen(false)}
+              className={style.link}
+              to="/contacts"
+            >
+              Contacts
+            </NavLink>
+          </li>
+        </ul>
+      </div>
       <h1 className={style.title}>
-        École de coloriage <br /> en ligne par Maria Fialko
+        École de coloration <br /> en ligne par Maria Fialko
       </h1>
     </header>
   );

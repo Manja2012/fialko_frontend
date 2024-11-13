@@ -1,4 +1,11 @@
 .card {
+  position: relative;
+  padding: 20px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
+              url('../../images/background.jpg') center/cover no-repeat; // Фоновое изображение
+  border-radius: 16px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+
   @media screen and (min-width: 768px) {
     display: flex;
     justify-content: space-between;
@@ -6,33 +13,47 @@
   }
 
   &__image {
-    border-radius: 8px;
-    padding: 12px;
-    width: 350px;
-    height: 355px;
+    border-radius: 12px;
+    padding: 8px;
+    width: 250px;
+    height: 250px;
     margin: 0 auto;
     object-fit: cover;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05); // Увеличение изображения при наведении
+    }
+
     @media screen and (min-width: 768px) {
-        width: 350px;
-        height: 350px;
+      width: 350px;
+      height: 350px;
     }
 
     @media screen and (min-width: 1200px) {
-      width: 350px;
+      width: 400px;
       height: 450px;
     }
   }
-  &__image_div{
- 
-      @media screen and (min-width: 768px) {
-       width: 60%;
+
+  &__image_div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media screen and (min-width: 768px) {
+      width: 40%;
     }
   }
+
   &__text {
     padding: 10px;
     font-size: 16px;
-    line-height: 1.5;
+    line-height: 1.6;
     color: var(--text-color);
+    text-align: left;
+    transition: opacity 0.3s ease;
 
     @media screen and (min-width: 768px) {
       padding: 20px;
@@ -40,39 +61,52 @@
     }
 
     @media screen and (min-width: 1200px) {
-      font-size: 28px;
-      line-height: 40px;
+      font-size: 20px;
+      line-height: 1.8;
     }
   }
 
   &__title {
-    margin-top: 4px;
-    font-size: 64px;
-    line-height: 1.5;
+    font-size: 3rem;
+    line-height: 1.2;
     color: var(--accent-color);
+    animation: fadeInDown 1s ease; // Анимация появления текста
+
+    @media screen and (min-width: 768px) {
+      font-size: 4rem;
+    }
   }
-    &__title2 {
-    margin-top: 4px;
-    font-size: 40px;
-    line-height: 1.5;
+
+  &__title2 {
+    margin-bottom: 30px;
+    font-size: 1.5rem;
     color: var(--text-color);
     text-align: left;
+    opacity: 0;
+    animation: fadeInLeft 1s forwards ease-in-out 0.5s; // Анимация плавного появления
   }
 
-  &__description{
-   margin-top: 4px;
-    font-size: 34px;
-    line-height: 1.5;
+  &__description {
+    font-size: 1.5rem;
+    line-height: 1.4;
     color: var(--accent-color);
-   }
+    margin-top: 12px;
+    animation: fadeInUp 1s ease;
+
+    @media screen and (min-width: 768px) {
+      font-size: 1.8rem;
+    }
+  }
 
   &__block {
+    width: 100%;
+    margin: 20px 0;
+
     @media screen and (min-width: 768px) {
-      width: 60%;
+      width: 55%;
     }
-  
   }
-    
+
   &__link {
     display: block;
     text-align: left;
@@ -80,8 +114,40 @@
     font-weight: 500;
     font-size: 22px;
     line-height: 1.5;
-  
     color: var(--accent-color);
   }
 
+  // Анимация появления элементов
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
 }

@@ -1,182 +1,140 @@
 import { useState, useEffect } from "react";
-import {
-  deleteCourse,
-  getCourses,
-  updateCourse,
-} from "../../api/api-client.js";
-import CourseCard from "../Course/CourseCard.jsx";
+import { useParams, useNavigate } from "react-router-dom";
+import { getCourseById, updateCourse } from "../../api/api-client";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import style from "../ContactsForm/ContactsForm.module.scss";
 
 const UpdateCourse = () => {
-  const [courses, setCourses] = useState([]);
-  const [currentId, setCurrentId] = useState();
-  const [name, setName] = useState("");
-  const [category, setCategory] = useState("");
-  const [content, setContent] = useState("");
-  const [price, setPrice] = useState("");
-  const [picture, setPicture] = useState(null);
-
-  const fetchCourses = async () => {
-    try {
-      const { data } = await getCourses();
-      setCourses(data);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [courseData, setCourseData] = useState({
+    name: "",
+    content: "",
+    category: "",
+    price: "",
+    picture: null,
+  });
 
   useEffect(() => {
-    fetchCourses();
+    fetchCourseData();
   }, []);
 
-  const deleteOneCourse = async (id) => {
-    await deleteCourse(id);
-    await fetchCourses();
-  };
-
-  const handleSubmit = async (event, currentId) => {
-    event.preventDefault();
-
+  const fetchCourseData = async () => {
     try {
-      const formData = new FormData();
-      formData.append("name", name);
-      formData.append("category", category);
-      formData.append("content", content);
-      formData.append("price", price);
-      formData.append("picture", picture);
-
-      const response = await updateCourse(formData, currentId);
-      console.log(response);
-    } catch (e) {
-      console.log(e);
+      const { data } = await getCourseById(id);
+      setCourseData({
+        name: data.name,
+        content: data.content,
+        category: data.category,
+        price: data.price,
+      });
+    } catch (error) {
+      toast.error("Erreur lors de la récupération du cours", {
+        className: style.errorMessage,
+      });
     }
   };
-  // const modifyCourse = async (_id) => {
-  //   await updateCourse({ name, category, content, price, picture, _id });
-  //   await fetchCourses();
-  // };
-  const modify = (editedCourse) => {
-    // TODO: afficher un formulaire de modification
-    setCurrentId(editedCourse._id);
 
-    setCategory(editedCourse.category);
-    setName(editedCourse.name);
-    setContent(editedCourse.content);
-    setPrice(editedCourse.price);
-    setPicture(editedCourse.picture);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCourseData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
-  const handlePictureChange = (event) => {
-    setPicture(event.target.files[0]);
+  const handleFileChange = (e) => {
+    setCourseData((prevData) => ({
+      ...prevData,
+      picture: e.target.files[0],
+    }));
   };
 
-  const handleNameChange = (event) => {
-    setName(event.target.value);
-  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("name", courseData.name);
+    formData.append("content", courseData.content);
+    formData.append("category", courseData.category);
+    formData.append("price", courseData.price);
+    if (courseData.picture) formData.append("picture", courseData.picture);
 
-  const handleCategoryChange = (event) => {
-    setCategory(event.target.value);
-  };
-  const handleContentChange = (event) => {
-    setContent(event.target.value);
-  };
-  const handlePriceChange = (event) => {
-    setPrice(event.target.value);
+    try {
+      await updateCourse(formData, id);
+      toast.success("Le cours a été mis à jour avec succès !", {
+        className: style.successMessage,
+      });
+      navigate(`/courses/${id}`);
+    } catch (error) {
+      toast.error("Erreur lors de la mise à jour du cours", {
+        className: style.errorMessage,
+      });
+    }
   };
 
   return (
-    <>
-      <main>
-        <h2 className={style.title}>Liste des cours</h2>
-        <ul className="section">
-          {courses.map((card, index) => (
-            <li key={index}>
-              <CourseCard
-                id={card.id}
-                name={card.name}
-                content={card.content}
-                category={card.category}
-                picture={card.picture}
-                price={card.price}
-              />
+    <div className="container">
+      <h2 className="title">Modifier le cours</h2>
+      <form onSubmit={handleSubmit} className="form">
+        <label className={style.form__label} htmlFor="name">
+          Nom du cours:
+        </label>
+        <input
+          type="text"
+          name="name"
+          value={courseData.name}
+          onChange={handleChange}
+          className={style.form__input}
+        />
 
-              <button
-                className="button"
-                onClick={() => deleteOneCourse(card._id)}
-              >
-                Annuler
-              </button>
-              <button className="button" onClick={() => modify(card)}>
-                Modifier
-              </button>
-            </li>
-          ))}
-        </ul>
-      </main>
-      {currentId && (
-        <div>
-          <div>
-            <form
-              onSubmit={(e) => handleSubmit(e, currentId)}
-              // onSubmit={(event) => {
-              //   event.preventDefault();
-              //   modifyCourse(currentId);
-              // }}
-            >
-              <label className={style.form__label}>
-                name
-                <input
-                  className={style.form__input}
-                  type="text"
-                  onChange={handleNameChange}
-                  name="name"
-                  value={name}
-                />
-              </label>
-              <label className={style.form__label}>
-                category
-                <input
-                  className={style.form__input}
-                  type="text"
-                  onChange={handleCategoryChange}
-                  name="category"
-                />
-              </label>
-              <label className={style.form__label}>
-                content
-                <input
-                  className={style.form__input}
-                  type="text"
-                  onChange={handleContentChange}
-                  name="content"
-                />
-              </label>
-              <label className={style.form__label}>
-                price
-                <input
-                  className={style.form__input}
-                  type="text"
-                  onChange={handlePriceChange}
-                  name="price"
-                />
-              </label>
-              <label className={style.form__label}>
-                picture
-                <input
-                  className={style.form__input}
-                  type="file"
-                  onChange={handlePictureChange}
-                  name="picture"
-                />
-              </label>
-              <button className="button" type="submit">
-                Modifier
-              </button>
-            </form>
-          </div>
-        </div>
-      )}
-    </>
+        <label className={style.form__label} htmlFor="content">
+          Contenu:
+        </label>
+        <textarea
+          name="content"
+          value={courseData.content}
+          onChange={handleChange}
+          className={style.form__comment}
+        />
+
+        <label className={style.form__label} htmlFor="category">
+          Catégorie:
+        </label>
+        <input
+          type="text"
+          name="category"
+          value={courseData.category}
+          onChange={handleChange}
+          className={style.form__input}
+        />
+
+        <label className={style.form__label} htmlFor="price">
+          Prix:
+        </label>
+        <input
+          type="number"
+          name="price"
+          value={courseData.price}
+          onChange={handleChange}
+          className={style.form__input}
+        />
+
+        <label className={style.form__label} htmlFor="picture">
+          Image:
+        </label>
+        <input
+          type="file"
+          name="picture"
+          onChange={handleFileChange}
+          className={style.form__input}
+        />
+
+        <button type="submit" className={style.form__button}>
+          Mettre à jour le cours
+        </button>
+      </form>
+    </div>
   );
 };
 

@@ -1,23 +1,17 @@
 import { useState } from "react";
 import { addCourse } from "../../api/api-client.js";
 import style from "../ContactsForm/ContactsForm.module.scss";
-// import { useUser } from "../../contexts/userContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddCourseForm = () => {
-  // const [course, setCourse] = useState({})
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
   const [content, setContent] = useState("");
   const [price, setPrice] = useState("");
   const [picture, setPicture] = useState(null);
-  // const { user } = useUser();
+  const [isCourseAdded, setIsCourseAdded] = useState(false);
 
-  // const handleChange = (event) => {
-  //   const { name, value } = event.target
-  //   setCourse((course) => ({ ...course, [name]: value }))
-  //   console.log(course);
-  //   // localStorage.setItem('product', JSON.stringify(product))
-  // }
   const handlePictureChange = (event) => {
     setPicture(event.target.files[0]);
   };
@@ -29,15 +23,23 @@ const AddCourseForm = () => {
   const handleCategoryChange = (event) => {
     setCategory(event.target.value);
   };
+
   const handleContentChange = (event) => {
     setContent(event.target.value);
   };
+
   const handlePriceChange = (event) => {
     setPrice(event.target.value);
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+   
+    if (isCourseAdded) {
+      toast.error("Ce cours a déjà été ajouté !");
+      return;
+    }
 
     try {
       const formData = new FormData();
@@ -49,54 +51,79 @@ const AddCourseForm = () => {
 
       const response = await addCourse(formData);
       console.log(response);
+
+    
+      toast.success("Cours ajouté avec succès !");
+      setIsCourseAdded(true);
+
+     
+      setName("");
+      setCategory("");
+      setContent("");
+      setPrice("");
+      setPicture(null);
     } catch (e) {
       console.log(e);
+      toast.error("Une erreur s'est produite lors de l'ajout du cours.");
     }
+  };
+
+  const handleReset = () => {
+    setIsCourseAdded(false);
   };
 
   return (
     <div className="container">
+      <ToastContainer />
       <section className="section">
-        <h1 className={style.title}> Ajouter un cours</h1>
-        <form onSubmit={handleSubmit} className={style.form} autoComplete="off">
+        <h1 className="title">Ajouter un cours</h1>
+        <form onSubmit={handleSubmit} className="form" autoComplete="off">
           <label className={style.form__label}>
-            name
+            Nom
             <input
               className={style.form__input}
               type="text"
               onChange={handleNameChange}
+              value={name}
               name="name"
+              onFocus={handleReset} // Сброс состояния при фокусе
             />
           </label>
           <label className={style.form__label}>
-            category
+            Catégorie
             <input
               className={style.form__input}
               type="text"
               onChange={handleCategoryChange}
+              value={category}
               name="category"
+              onFocus={handleReset} // Сброс состояния при фокусе
             />
           </label>
           <label className={style.form__label}>
-            content
+            Contenu
             <input
               className={style.form__input}
               type="text"
               onChange={handleContentChange}
+              value={content}
               name="content"
+              onFocus={handleReset} // Сброс состояния при фокусе
             />
           </label>
           <label className={style.form__label}>
-            price
+            Prix
             <input
               className={style.form__input}
               type="text"
               onChange={handlePriceChange}
+              value={price}
               name="price"
+              onFocus={handleReset} // Сброс состояния при фокусе
             />
           </label>
           <label className={style.form__label}>
-            picture
+            Image
             <input
               className={style.form__input}
               type="file"
@@ -105,7 +132,7 @@ const AddCourseForm = () => {
             />
           </label>
           <button className="button" type="submit">
-            ajouter un cours
+            Ajouter un cours
           </button>
         </form>
       </section>

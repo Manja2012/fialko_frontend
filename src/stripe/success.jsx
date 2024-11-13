@@ -1,12 +1,14 @@
 import { useNavigate } from "react-router-dom";
-import { useCart } from "../contexts/сardContext"; // Импортируйте контекст
+import { useCart } from "../contexts/сardContext";
 
 const SuccessPage = () => {
   const navigate = useNavigate();
-  const { clearCart } = useCart(); // Получите функцию очистки корзины
+  const { clearCart, cart } = useCart(); // Получаем cart из контекста
 
   const handleClearCart = () => {
-    clearCart(); // Очищаем корзину с помощью функции из контекста
+    const paidCourses = cart.map((item) => item._id); // Получаем IDs оплаченных курсов
+    localStorage.setItem("paidCourses", JSON.stringify(paidCourses)); // Сохраняем оплаченные курсы
+    clearCart(); // Очищаем корзину
     navigate("/"); // Перенаправление на главную страницу
   };
 

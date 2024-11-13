@@ -1,0 +1,26 @@
+.cartCard__removeButton {
+  background-color: #ff4d4d;
+  border: none;
+  border-radius: 12px;
+  padding: 5px 12px;
+  color: white;
+  cursor: pointer;
+  font-size:14px;
+  margin-top: 5px;
+}
+
+.cartCard__removeButton:hover {
+  background-color: #d44242;
+}
+.cartCard__item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom:1px solid #eeeeee;
+}
+.cartCard__text{
+    padding: 60px;
+    font-size: 1.5rem;
+    color: var(--text-color);
+    text-align: center;
+}

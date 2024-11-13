@@ -12,7 +12,7 @@ const LogoutButton = () => {
     navigate('/log-in'); // Перенаправление на страницу входа после выхода
   };
 
-  return <div><button className={style.button} onClick={handleLogout}>se deconnecter|</button>
+  return <div><button className={style.button} onClick={handleLogout}>Se deconnecter|</button>
     </div>
 };
 
