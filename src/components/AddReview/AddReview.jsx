@@ -1,51 +1,49 @@
 import { useState, useEffect } from "react";
 import { addReview, getReviewsForCourse } from "../../api/api-client.js";
 import { useUser } from "../../contexts/userContext.jsx";
-import { ToastContainer, toast } from "react-toastify"; // Импортируем необходимые компоненты из react-toastify
-import "react-toastify/dist/ReactToastify.css"; // Импортируем стили для Toastify
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import style from "../ContactsForm/ContactsForm.module.scss";
 
-const AddReview = ({ courseId, onReviewAdded }) => {
+const AddReview = ({ courseId, onReviewAdded, hasPaid }) => {
   const [rating, setRating] = useState("");
   const [comment, setComment] = useState("");
-  const [hasReviewed, setHasReviewed] = useState(false);
   const { user } = useUser();
+  const [hasReviewed, setHasReviewed] = useState(false);
 
   useEffect(() => {
-    // Проверяем наличие записи в localStorage
-    const reviewed = localStorage.getItem(`hasReviewed-${courseId}`);
-    if (reviewed === "true") {
-      setHasReviewed(true);
-    } else {
-      const checkUserReview = async () => {
-        try {
-          const reviews = await getReviewsForCourse(courseId);
-          if (reviews && Array.isArray(reviews)) {
-            const userReview = reviews.find(
-              (review) => review.user === user._id
-            );
-            if (userReview) {
-              setHasReviewed(true);
-              localStorage.setItem(`hasReviewed-${courseId}`, "true");
-            }
+    const checkUserReview = async () => {
+      try {
+        const reviews = await getReviewsForCourse(courseId);
+        if (reviews && Array.isArray(reviews)) {
+          const userReview = reviews.find((review) => review.user === user._id);
+          if (userReview) {
+            setHasReviewed(true);
           }
-        } catch (error) {
-          console.error("Failed to check user review:", error);
-          toast.error("Failed to fetch reviews. Please try again later.", {
-            className: style.errorMessage,
-          });
         }
-      };
+      } catch (error) {
+        console.error("Erreur lors de la récupération des avis:", error);
+        toast.error("Impossible de récupérer les avis", {
+          className: style.errorMessage,
+        });
+      }
+    };
 
-      checkUserReview();
-    }
+    checkUserReview();
   }, [courseId, user._id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!hasPaid) {
+      toast.error("Vous devez d'abord payer le cours pour laisser un avis.", {
+        className: style.errorMessage,
+      });
+      return;
+    }
+
     if (rating < 1 || rating > 5) {
-      toast.error("Veuillez entrer une note entre 1 et 5.", {
+      toast.error("Veuillez sélectionner une note entre 1 et 5.", {
         className: style.errorMessage,
       });
       return;
@@ -59,29 +57,27 @@ const AddReview = ({ courseId, onReviewAdded }) => {
         rating: Number(rating),
       });
 
-      toast.success("Review submitted successfully!", {
+      toast.success("Avis ajouté avec succès!", {
         className: style.successMessage,
       });
       onReviewAdded({ comment, rating: Number(rating), user: user._id });
       setRating("");
       setComment("");
       setHasReviewed(true);
-
-      localStorage.setItem(`hasReviewed-${courseId}`, "true");
     } catch (error) {
-      console.error("Failed to submit review:", error);
-      toast.error("Failed to submit review", { className: style.errorMessage });
+      console.error("Erreur lors de l'envoi de l'avis:", error);
+      toast.error("Impossible d'envoyer l'avis", {
+        className: style.errorMessage,
+      });
     }
   };
 
   return (
     <div>
-      {hasReviewed ? (
-        <p>Vous avez déjà laissé un avis pour ce cours.</p>
-      ) : (
+      {hasPaid && !hasReviewed ? (
         <form onSubmit={handleSubmit}>
           <div>
-            <label className={style.form__label}>Rating:</label>
+            <label className={style.form__label}>Note:</label>
             <input
               className={style.form__input}
               type="number"
@@ -93,7 +89,7 @@ const AddReview = ({ courseId, onReviewAdded }) => {
             />
           </div>
           <div>
-            <label className={style.form__label}>Comment:</label>
+            <label className={style.form__label}>Commentaire:</label>
             <textarea
               className={style.form__comment}
               value={comment}
@@ -102,9 +98,15 @@ const AddReview = ({ courseId, onReviewAdded }) => {
             />
           </div>
           <button className="button" type="submit">
-            Submit Review
+            Laisser un avis
           </button>
         </form>
+      ) : (
+        <p>
+          {hasReviewed
+            ? "Vous avez déjà laissé un avis"
+            : "Payez le cours pour laisser un avis"}
+        </p>
       )}
       <ToastContainer />
     </div>

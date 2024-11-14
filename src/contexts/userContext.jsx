@@ -1,12 +1,12 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import { logIn, register } from "../api/api-client";
 import axios from "axios";
-import { useCart } from "./сardContext"; // Импортируем useCart
+import { useCart } from "./сardContext";
 
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const { clearCart } = useCart(); // Получаем clearCart из CartContext
+  const { clearCart } = useCart();
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -19,7 +19,6 @@ export const UserProvider = ({ children }) => {
           }
         );
         const userData = response.data;
-        console.log(userData);
         setUser(userData);
       } catch (error) {
         console.error("error", error);
@@ -31,6 +30,10 @@ export const UserProvider = ({ children }) => {
 
   const login = async (email, password) => {
     const userData = await logIn(email, password);
+
+    localStorage.clear();
+    clearCart(); 
+
     setUser(userData);
     return userData;
   };
@@ -38,7 +41,7 @@ export const UserProvider = ({ children }) => {
   const logout = () => {
     setUser(null);
     localStorage.removeItem("token");
-    clearCart(); // Очищаем корзину при выходе
+    clearCart(); 
   };
 
   const registerUser = async (userData) => {
