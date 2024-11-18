@@ -1,4 +1,5 @@
-const API = "http://localhost:3001/api";
+import config from "../../config";
+const API = config.apiBaseUrl;
 
 export async function fetchFromApi(endpoint, opts) {
   const { method, body } = { method: "POST", body: null, ...opts };
