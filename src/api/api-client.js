@@ -2,16 +2,17 @@ import axios from "axios";
 import config from "../config";
 import { contactsRoute, coursesRoute, reviewsRoute } from "./routes";
 
+axios.defaults.withCredentials = true;
+
 const apiClient = axios.create({
   baseURL: config.apiBaseUrl,
-  withCredentials: true,
 });
 
 export default apiClient;
 
 export const sendMessage = (contact) => {
   console.log(contact);
-  apiClient.post(`${contactsRoute}/add`, contact);
+  apiClient.post(`${contactsRoute}add`, contact);
 };
 
 export const logIn = async (email, password) => {

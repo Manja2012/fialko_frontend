@@ -26,18 +26,29 @@ const ContactsForm = () => {
     if (!message.trim()) {
       notify();
     } else {
-      await sendMessage({
+      console.log({
         email,
         name,
         phone,
         message,
       });
-
-      setName("");
-      setEmail("");
-      setMessage("");
-      setPhone("");
-      confirmation();
+      try {
+        await sendMessage({
+          email,
+          name,
+          phone,
+          message,
+        });
+        /*
+        setName("");
+        setEmail("");
+        setMessage("");
+        setPhone("");
+        */
+        confirmation();
+      } catch (error) {
+        console.warn(error);
+      }
     }
   };
 
