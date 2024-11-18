@@ -1,7 +1,7 @@
 import axios from "axios";
 import config from "../config";
 import { contactsRoute, coursesRoute, reviewsRoute } from "./routes";
-
+// api 
 axios.defaults.withCredentials = true;
 
 const apiClient = axios.create({
