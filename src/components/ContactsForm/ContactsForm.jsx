@@ -1,3 +1,4 @@
+import React from "react";
 import { StrictMode, useState } from "react";
 import { sendMessage } from "../../api/api-client.js";
 import { ToastContainer, toast } from "react-toastify";

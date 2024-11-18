@@ -3,7 +3,7 @@ import Slide from "../../components/Slider/Slider";
 const PhotosPage = () => {
   return (
     <>
-        <Slide/>
+      <Slide />
     </>
   );
 };

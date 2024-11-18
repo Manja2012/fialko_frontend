@@ -1,12 +1,10 @@
-import RegistrationForm from "../../components/RegistrationForm/RegistrationForm"
+import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
 
-
-const RegistrationPage = () =>{  
-
-  return(
+const RegistrationPage = () => {
+  return (
     <>
-    <RegistrationForm/>
+      <RegistrationForm />
     </>
-  )
-}
+  );
+};
 export default RegistrationPage;

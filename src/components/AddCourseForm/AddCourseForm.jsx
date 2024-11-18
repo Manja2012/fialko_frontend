@@ -1,3 +1,6 @@
+import React from "react"; // Добавьте этот импорт
+
+
 import { useState } from "react";
 import { addCourse } from "../../api/api-client.js";
 import style from "../ContactsForm/ContactsForm.module.scss";
@@ -35,7 +38,6 @@ const AddCourseForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-   
     if (isCourseAdded) {
       toast.error("Ce cours a déjà été ajouté !");
       return;
@@ -52,11 +54,9 @@ const AddCourseForm = () => {
       const response = await addCourse(formData);
       console.log(response);
 
-    
       toast.success("Cours ajouté avec succès !");
       setIsCourseAdded(true);
 
-     
       setName("");
       setCategory("");
       setContent("");
@@ -97,7 +97,7 @@ const AddCourseForm = () => {
               onChange={handleCategoryChange}
               value={category}
               name="category"
-              onFocus={handleReset} // Сброс состояния при фокусе
+              onFocus={handleReset}
             />
           </label>
           <label className={style.form__label}>
@@ -108,7 +108,7 @@ const AddCourseForm = () => {
               onChange={handleContentChange}
               value={content}
               name="content"
-              onFocus={handleReset} // Сброс состояния при фокусе
+              onFocus={handleReset}
             />
           </label>
           <label className={style.form__label}>
@@ -119,7 +119,7 @@ const AddCourseForm = () => {
               onChange={handlePriceChange}
               value={price}
               name="price"
-              onFocus={handleReset} // Сброс состояния при фокусе
+              onFocus={handleReset}
             />
           </label>
           <label className={style.form__label}>

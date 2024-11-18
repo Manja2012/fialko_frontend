@@ -1,5 +1,4 @@
 import PhotoAdmin from "../../images/profil.webp";
-// import BackgroundImage from "../../images/profil2.webp"; // Новый фон
 import style from "./AboutMePage.module.scss";
 
 const AboutMePage = () => {
@@ -10,7 +9,6 @@ const AboutMePage = () => {
           <h2 className={style.card__title2}>A propos de moi</h2>
           <div
             className={style.card}
-            // style={{ backgroundImage: `url(${BackgroundImage})` }}
           >
             <div className={style.card__block}>
               <h1 className={style.card__title}>Maria Fialko</h1>

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import style from "./AdminPage.module.scss"
-// import AddCourseForm from "../../components/AddCourseForm/AddCourseForm";
+
 const AdminPage = () => {
   return (
     <section className="section">

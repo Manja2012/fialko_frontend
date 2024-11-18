@@ -25,6 +25,7 @@ export const logIn = async (email, password) => {
 export const register = (user) => apiClient.post("/user/add", user);
 
 export const getCourses = () => apiClient.get(coursesRoute);
+
 export const getCourseById = (id) => apiClient.get(`${coursesRoute}${id}`);
 
 export const addCourse = (course) =>
@@ -51,15 +52,15 @@ export const getReviewsForCourse = async (courseId) => {
   return response.data;
 };
 
-export const checkReservation = async (courseId) => {
-  const { data } = await apiClient.get(`/reservation/check/${courseId}`);
-  return data.hasReserved;
-};
+// export const checkReservation = async (courseId) => {
+//   const { data } = await apiClient.get(`/reservation/check/${courseId}`);
+//   return data.hasReserved;
+// };
 
-export const getAllReservationByUser = async () => {
-  const reservations = await apiClient.get("/reservation/my/reservation");
-  return reservations.data;
-};
+// export const getAllReservationByUser = async () => {
+//   const reservations = await apiClient.get("/reservation/my/reservation");
+//   return reservations.data;
+// };
 
 export const deleteReview = async (reviewId) => {
   const response = await apiClient.delete(`/review/${reviewId}`);

@@ -19,7 +19,6 @@ import PhotosPage from "./pages/PhotosPage/PhotosPages.jsx";
 import AddCourseForm from "./components/AddCourseForm/AddCourseForm.jsx";
 import UpdateCourse from "./components/UpdateCourse/UpdateCourse.jsx";
 import UpdateReviews from './components/UpdateReviews/UpdateReviews.jsx'
-// import ReservationPage from './pages/ReservationPage/ReservationPage';
 
 function App() {
   const { user } = useUser();
@@ -36,7 +35,6 @@ function App() {
           <Route path="/log-in" element={<LoginPage />} />
           <Route path="/propos" element={<AboutMePage />} />
           <Route path="/success" element={<Success />} />
-          {/* <Route path="/reservation" element={<ReservationPage />} /> */}
           <Route path="/panier" element={<PanierPage />} />
           <Route path="/paiement" element={<PaiementPage />} />
           <Route path="/photos" element={<PhotosPage />} />

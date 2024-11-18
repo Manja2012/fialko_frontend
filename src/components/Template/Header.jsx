@@ -77,8 +77,6 @@ const Header = () => {
             </ul>
           </nav>
         </div>
-
-        {/* Логин и регистрация в десктопной версии */}
         <ul
           className={`${style.nav} ${style.nav__margin} ${style.desktop_only}`}
         >
@@ -94,7 +92,6 @@ const Header = () => {
           </li>
         </ul>
 
-        {/* Логин и регистрация в мобильной версии */}
         <div className={style.mobile_links}>
           <Link className={style.nav__link} to="/register">
             s’inscrire

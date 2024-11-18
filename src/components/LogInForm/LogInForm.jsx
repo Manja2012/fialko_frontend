@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import { logIn } from '../../api/api-client.js';
-import { useUser } from '../../contexts/userContext.jsx'; // Импортируйте useUser
+import { useUser } from '../../contexts/userContext.jsx'; 
 import css from '../ContactsForm/ContactsForm.module.scss';
 import style from './LogIn.module.scss';
 
@@ -9,12 +8,12 @@ const LogInForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { login } = useUser(); // Используйте login из контекста
+  const { login } = useUser();
 
   const handleSubmit = async event => {
     event.preventDefault();
     try {
-      const user = await login(email, password); // Установите пользователя в контексте
+      const user = await login(email, password); 
 
       if (user.isAdmin) {
         navigate("/admin");
