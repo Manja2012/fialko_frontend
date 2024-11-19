@@ -1,7 +1,7 @@
 import axios from "axios";
 import config from "../config";
 import { contactsRoute, coursesRoute, reviewsRoute } from "./routes";
-// api 
+
 axios.defaults.withCredentials = true;
 
 const apiClient = axios.create({
@@ -29,7 +29,7 @@ export const getCourses = () => apiClient.get(coursesRoute);
 export const getCourseById = (id) => apiClient.get(`${coursesRoute}${id}`);
 
 export const addCourse = (course) =>
-  apiClient.post(`${coursesRoute}/add`, course);
+  apiClient.post(`${coursesRoute}`, course);
 
 export const deleteCourse = async (id) => {
   const response = await apiClient.delete(`${coursesRoute}${id}`);
@@ -52,15 +52,15 @@ export const getReviewsForCourse = async (courseId) => {
   return response.data;
 };
 
-export const checkReservation = async (courseId) => {
-  const { data } = await apiClient.get(`/reservation/check/${courseId}`);
-  return data.hasReserved;
-};
+// export const checkReservation = async (courseId) => {
+//   const { data } = await apiClient.get(`/reservation/check/${courseId}`);
+//   return data.hasReserved;
+// };
 
-export const getAllReservationByUser = async () => {
-  const reservations = await apiClient.get("/reservation/my/reservation");
-  return reservations.data;
-};
+// export const getAllReservationByUser = async () => {
+//   const reservations = await apiClient.get("/reservation/my/reservation");
+//   return reservations.data;
+// };
 
 export const deleteReview = async (reviewId) => {
   const response = await apiClient.delete(`/review/${reviewId}`);
