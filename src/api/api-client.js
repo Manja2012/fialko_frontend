@@ -29,7 +29,7 @@ export const getCourses = () => apiClient.get(coursesRoute);
 export const getCourseById = (id) => apiClient.get(`${coursesRoute}${id}`);
 
 export const addCourse = (course) =>
-  apiClient.post(`${coursesRoute}/add`, course);
+  apiClient.post(`${coursesRoute}`, course);
 
 export const deleteCourse = async (id) => {
   const response = await apiClient.delete(`${coursesRoute}${id}`);
