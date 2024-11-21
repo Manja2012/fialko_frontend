@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import style from "./CourseCard.module.scss";
+import config from "../../config";
 
 const CourseCard = ({
   id,
@@ -13,7 +14,7 @@ const CourseCard = ({
   isSingleCourse = false,
   isCartPage = false,
 }) => {
-  const pictureUrl = "http://localhost:3001/" + "temp/";
+  const pictureUrl = `${config.photoApi}temp/`;
 
   return (
     <Link className={style.card__link} to={`/courses/${id}`}>

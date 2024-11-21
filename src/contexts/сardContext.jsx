@@ -32,12 +32,11 @@ export const CartProvider = ({ children }) => {
 
   const handleUserChange = (isLoggedIn, userId) => {
     if (!isLoggedIn) {
-      clearCart(); // Очистить корзину при выходе
+      clearCart();
     } else {
-      // Если необходимо, можно добавить логику для работы с корзиной конкретного пользователя
       const savedCart = JSON.parse(localStorage.getItem("cart"));
       if (savedCart && savedCart.some((item) => item.userId !== userId)) {
-        clearCart(); // Если это не корзина текущего пользователя, очистить её
+        clearCart();
       }
     }
   };

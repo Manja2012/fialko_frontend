@@ -50,8 +50,8 @@ const StripeCheckout = () => {
           value={email}
           required
         />
-        <button className={style.form__button} type="submit">
-          CHECKOUT
+        <button className="button" type="submit">
+          Checkout
         </button>
       </form>
     </div>

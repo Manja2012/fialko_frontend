@@ -2,6 +2,7 @@ import { createContext, useState, useContext, useEffect } from "react";
 import { logIn, register } from "../api/api-client";
 import axios from "axios";
 import { useCart } from "./сardContext";
+import config from "../config";
 
 const UserContext = createContext();
 
@@ -13,7 +14,7 @@ export const UserProvider = ({ children }) => {
     const getUser = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3001/api/user/current/get",
+          `${config.apiBaseUrl}/user/current/get`,
           {
             withCredentials: true,
           }

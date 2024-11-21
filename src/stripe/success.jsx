@@ -15,8 +15,8 @@ const SuccessPage = () => {
 
   return (
     <div className={style.form}>
-      <h2 className={style.title}>Success!</h2>
-      <button className={style.form__button} onClick={handleClearCart}>
+      <h2 className={style.title}>Le cours a été payé avec succès!</h2>
+      <button className="button" onClick={handleClearCart}>
         OK
       </button>
     </div>
