@@ -1,4 +1,4 @@
-import PhotoAdmin from "../../images/profil.webp";
+import PhotoAdmin from "../../../public/images/profil.webp";
 // import BackgroundImage from "../../images/profil2.webp"; // Новый фон
 import style from "./AboutMePage.module.scss";
 
