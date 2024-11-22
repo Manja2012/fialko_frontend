@@ -56,7 +56,7 @@ function Slide() {
           <div>
             <img
               className={style.image}
-              src="../../../public/images/photo1.webp"
+              src="../../../public/images/png.PNG"
               alt="Cours de coloration des cheveux pour débutants"
             />
           </div>
