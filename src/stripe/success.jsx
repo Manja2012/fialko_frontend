@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useCart } from "../contexts/сardContext";
 import style from "../components/ContactsForm/ContactsForm.module.scss"; 
 
-const SuccessPage = () => {
+const Success = () => {
   const navigate = useNavigate();
   const { clearCart, cart } = useCart();
 
@@ -23,4 +23,4 @@ const SuccessPage = () => {
   );
 };
 
-export default SuccessPage;
+export default Success;
