@@ -56,84 +56,84 @@ function Slide() {
           <div>
             <img
               className={style.image}
-              src="../../../public/images/png.PNG"
+              src="/images/photo1.webp"
               alt="Cours de coloration des cheveux pour débutants"
             />
           </div>
           <div>
             <img
               className={style.image}
-              src="../../../public/images/photo2.webp"
+              src="/images/photo2.webp"
               alt="Cours avancé de coloration des cheveux"
             />
           </div>
           <div>
             <img
               className={style.image}
-              src="../../../public/images/photo3.webp"
+              src="/images/photo3.webp"
               alt="Techniques de coloration capillaire pour cheveux blonds"
             />
           </div>
           <div>
             <img
               className={style.image}
-              src="../../../public/images/photo4.webp"
+              src="/images/photo4.webp"
               alt="Formation en balayage et mèches pour cheveux foncés"
             />
           </div>
           <div>
             <img
               className={style.image}
-              src="../../../public/images/photo5.webp"
+              src="/images/photo5.webp"
               alt="Cours sur la coloration permanente des cheveux"
             />
           </div>
           <div>
             <img
               className={style.image}
-              src="../../../public/images/photo6.webp"
+              src="/images/photo6.webp"
               alt="Formation sur les colorations naturelles sans ammoniaque"
             />
           </div>
           <div>
             <img
               className={style.image}
-              src="../../../public/images/photo7.webp"
+              src="/images/photo7.webp"
               alt="Apprentissage du coloriste : réussir la coloration des racines"
             />
           </div>
           <div>
             <img
               className={style.image}
-              src="../../../public/images/photo8.webp"
+              src="/images/photo8.webp"
               alt="Cours de coloration créative pour cheveux courts"
             />
           </div>
           <div>
             <img
               className={style.image}
-              src="../../../public/images/photo9.webp"
+              src="/images/photo9.webp"
               alt="Formation sur les dégradés et ombré pour cheveux longs"
             />
           </div>
           <div>
             <img
               className={style.image}
-              src="../../../public/images/photo10.webp"
+              src="/images/photo10.webp"
               alt="Les bases de la coloration capillaire pour les débutants"
             />
           </div>
           <div>
             <img
               className={style.image}
-              src="../../../public/images/photo11.webp"
+              src="/images/photo11.webp"
               alt="Techniques de coloration de cheveux pour femmes de plus de 40 ans"
             />
           </div>
           <div>
             <img
               className={style.image}
-              src="../../../public/images/photo12.webp"
+              src="/images/photo12.webp"
               alt="Cours avancé de colorimétrie pour les stylistes professionnels"
             />
           </div>
