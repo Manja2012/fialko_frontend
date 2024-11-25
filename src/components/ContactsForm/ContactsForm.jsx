@@ -1,7 +1,7 @@
 import { StrictMode, useState } from "react";
 import { sendMessage } from "../../api/api-client.js";
 import { ToastContainer, toast } from "react-toastify";
-import Img from "../../../public/images/profil2.webp";
+import Img from "/images/profil2.webp";
 import "react-toastify/dist/ReactToastify.css";
 import style from "./ContactsForm.module.scss";
 

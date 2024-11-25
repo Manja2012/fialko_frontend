@@ -72,6 +72,32 @@ export const updateReview = async (id, review) => {
   return response.data;
 };
 
+// Запрос для отправки email для восстановления пароля
+export const requestPasswordReset = async (email) => {
+  try {
+    const response = await apiClient.post("/auth/request-password-reset", { email });
+    return response.data;
+  } catch (error) {
+    console.error("Error requesting password reset:", error.response?.data || error.message);
+    throw error;
+  }
+};
+
+// Запрос для сброса пароля
+export const resetPassword = async (token, newPassword) => {
+  try {
+    const response = await apiClient.post("/auth/reset-password", {
+      token,
+      newPassword,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error resetting password:", error.response?.data || error.message);
+    throw error;
+  }
+};
+
+
 // export const getOrder = async (orderId) => {
 //   const res = await apiClient.get(`/order/${orderId}`);
 //   return res.data;

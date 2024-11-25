@@ -1,68 +1,120 @@
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import { useState } from "react";
 import { register } from "../../api/api-client.js";
 import { useNavigate } from "react-router-dom";
-import style from '../ContactsForm/ContactsForm.module.scss'
+import { FiEye, FiEyeOff } from "react-icons/fi"; 
+import style from "../ContactsForm/ContactsForm.module.scss";
+
+const schema = yup.object().shape({
+  name: yup
+    .string()
+    .min(3, "Le nom doit contenir au moins 3 caractères")
+    .required("Le nom est obligatoire"),
+  email: yup
+    .string()
+    .email("Format d'email invalide")
+    .required("L'email est obligatoire"),
+  password: yup
+    .string()
+    .min(10, "Le mot de passe doit contenir au moins 10 caractères")
+    .matches(/[A-Z]/, "Le mot de passe doit contenir au moins une majuscule")
+    .matches(/[0-9]/, "Le mot de passe doit contenir au moins un chiffre")
+    .required("Le mot de passe est obligatoire"),
+});
 
 const RegistrationForm = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
- 
+  const {
+    register: registerInput,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
-    const handleSubmit = async (e) => {
-      e.preventDefault();
+  const onSubmit = async (data) => {
+    try {
+      await register(data);
+      navigate("/log-in");
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
 
-      try {
-        await register({email, password, name});
-        navigate("/log-in");
-      } catch (error) {
-        console.error(error.message);
-      }
-
-      setName("");
-      setEmail("");
-      setPassword("");
-    };
-
-    return (
+  return (
+    <section className="section">
       <div className="container">
-        <form className={style.form} autoComplete="off" onSubmit={handleSubmit}>
-          <label className={style.form__label}>
-            Username
-            <input
-              className={style.form__input}
-              type="text"
-              name="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </label>
-          <label className={style.form__label}>
-            Email
-            <input
-              className={style.form__input}
-              type="email"
-              name="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </label>
-          <label className={style.form__label}>
-            Password
-            <input
-              className={style.form__input}
-              type="password"
-              name="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </label>
-          <button className={style.form__button} type="submit">
-            Register
+        <h1 className="title">Créer un Compte</h1>
+        <form
+          className="form"
+          autoComplete="off"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <fieldset className={style.fieldset}>
+            <label className={style.form__label}>
+              nom d'utilisateur
+              <input
+                className={style.form__input}
+                type="text"
+                {...registerInput("name")}
+              />
+              {errors.name && (
+                <p className={`${style.error} custom-error-class`}>
+                  {errors.name.message}
+                </p>
+              )}
+            </label>
+            <label className={style.form__label}>
+              email
+              <input
+                className={style.form__input}
+                type="email"
+                {...registerInput("email")}
+              />
+              {errors.email && (
+                <p className={`${style.error} custom-error-class`}>
+                  {errors.email.message}
+                </p>
+              )}
+            </label>
+            <label className={style.form__label}>
+              mot de passe
+              <div style={{ position: "relative" }}>
+                <input
+                  className={style.form__input}
+                  type={showPassword ? "text" : "password"}
+                  {...registerInput("password")}
+                />
+                <span
+                  style={{
+                    position: "absolute",
+                    right: 10,
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <FiEyeOff size={20} /> : <FiEye size={20} />}
+                </span>
+              </div>
+              {errors.password && (
+                <p className={`${style.error} custom-error-class`}>
+                  {errors.password.message}
+                </p>
+              )}
+            </label>
+          </fieldset>
+          <button className="button" type="submit">
+            S'inscrire
           </button>
         </form>
       </div>
-    );
+    </section>
+  );
 };
+
 export default RegistrationForm;

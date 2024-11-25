@@ -18,7 +18,9 @@ import PaiementPage from "./pages/PaiementPage/PaiementPage.jsx";
 import PhotosPage from "./pages/PhotosPage/PhotosPages.jsx";
 import AddCourseForm from "./components/AddCourseForm/AddCourseForm.jsx";
 import UpdateCourse from "./components/UpdateCourse/UpdateCourse.jsx";
-import UpdateReviews from './components/UpdateReviews/UpdateReviews.jsx'
+import UpdateReviews from './components/UpdateReviews/UpdateReviews.jsx';
+import ForgotPasswordForm from "./components/ForgotPasswordForm/ForgotPasswordForm.jsx";
+import ResetPasswordForm from "./components/ResetPasswordForm/ResetPasswordForm.jsx";
 // import ReservationPage from './pages/ReservationPage/ReservationPage';
 
 function App() {
@@ -40,6 +42,8 @@ function App() {
           <Route path="/panier" element={<PanierPage />} />
           <Route path="/paiement" element={<PaiementPage />} />
           <Route path="/photos" element={<PhotosPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordForm />} />
+          <Route path="/reset-password" element={<ResetPasswordForm />} />
           {user.isAdmin && <Route path="/admin" element={<AdminPage />} />}
           <Route path="/add-course" element={<AddCourseForm />} />
           <Route path="/update-course/:id" element={<UpdateCourse />} />
@@ -55,6 +59,8 @@ function App() {
           <Route path="/courses/:id" element={<OneCoursePage />} />
           <Route path="/propos" element={<AboutMePage />} />
           <Route path="/photos" element={<PhotosPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordForm />} />
+          <Route path="/reset-password" element={<ResetPasswordForm />} />
         </Route>
       )}
     </Routes>
