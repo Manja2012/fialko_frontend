@@ -72,13 +72,6 @@ const OneCourse = () => {
     }
   };
 
-  // const handleReviewAdded = (newReview) => {
-  //   setCourse((prevCourse) => ({
-  //     ...prevCourse,
-  //     review: [...prevCourse.review, newReview],
-  //   }));
-  // };
-
   const handleDeleteCourse = async () => {
     if (window.confirm("Êtes-vous sûr de vouloir supprimer ce cours?")) {
       try {
