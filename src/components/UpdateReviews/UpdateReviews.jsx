@@ -24,35 +24,37 @@ const UpdateReview = () => {
   };
 
   return (
-    <div className="container">
-      <h2 className="title">Modifier l'avis</h2>
-      <form className="form" onSubmit={handleSubmit}>
-        <div>
-          <label className={style.form__label}>Rating:</label>
-          <input
-            className={style.form__input}
-            type="number"
-            value={newRating}
-            onChange={(e) => setNewRating(e.target.value)}
-            min="1"
-            max="5"
-            required
-          />
-        </div>
-        <div>
-          <label className={style.form__label}>Comment:</label>
-          <textarea
-            className={style.form__comment}
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-            required
-          />
-        </div>
-        <button className="button" type="submit">
-          Submit Review
-        </button>
-      </form>
-    </div>
+    <section className="section">
+      <div className="container">
+        <h2 className="title">Modifier l'avis</h2>
+        <form className="form" onSubmit={handleSubmit}>
+          <div>
+            <label className={style.form__label}>Rating:</label>
+            <input
+              className={style.form__input}
+              type="number"
+              value={newRating}
+              onChange={(e) => setNewRating(e.target.value)}
+              min="1"
+              max="5"
+              required
+            />
+          </div>
+          <div>
+            <label className={style.form__label}>Comment:</label>
+            <textarea
+              className={style.form__comment}
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+              required
+            />
+          </div>
+          <button className={style.form__button} type="submit">
+            Submit Review
+          </button>
+        </form>
+      </div>
+    </section>
   );
 };
 

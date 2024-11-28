@@ -55,7 +55,7 @@ const AddCourseForm = () => {
     
       toast.success("Cours ajouté avec succès !");
       setIsCourseAdded(true);
-
+     
      
       setName("");
       setCategory("");
@@ -86,7 +86,7 @@ const AddCourseForm = () => {
               onChange={handleNameChange}
               value={name}
               name="name"
-              onFocus={handleReset} // Сброс состояния при фокусе
+              onFocus={handleReset}
             />
           </label>
           <label className={style.form__label}>
@@ -97,7 +97,7 @@ const AddCourseForm = () => {
               onChange={handleCategoryChange}
               value={category}
               name="category"
-              onFocus={handleReset} // Сброс состояния при фокусе
+              onFocus={handleReset}
             />
           </label>
           <label className={style.form__label}>
@@ -108,7 +108,7 @@ const AddCourseForm = () => {
               onChange={handleContentChange}
               value={content}
               name="content"
-              onFocus={handleReset} // Сброс состояния при фокусе
+              onFocus={handleReset} 
             />
           </label>
           <label className={style.form__label}>
@@ -119,7 +119,7 @@ const AddCourseForm = () => {
               onChange={handlePriceChange}
               value={price}
               name="price"
-              onFocus={handleReset} // Сброс состояния при фокусе
+              onFocus={handleReset}
             />
           </label>
           <label className={style.form__label}>

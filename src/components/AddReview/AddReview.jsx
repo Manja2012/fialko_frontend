@@ -23,9 +23,7 @@ const AddReview = ({ courseId, onReviewAdded, hasPaid }) => {
         }
       } catch (error) {
         console.error("Erreur lors de la récupération des avis:", error);
-        toast.error("Impossible de récupérer les avis", {
-          className: style.errorMessage,
-        });
+        // toast.error("Impossible de récupérer les avis");
       }
     };
 
@@ -36,16 +34,12 @@ const AddReview = ({ courseId, onReviewAdded, hasPaid }) => {
     e.preventDefault();
 
     if (!hasPaid) {
-      toast.error("Vous devez d'abord payer le cours pour laisser un avis.", {
-        className: style.errorMessage,
-      });
+      toast.error("Vous devez d'abord payer le cours pour laisser un avis.");
       return;
     }
 
     if (rating < 1 || rating > 5) {
-      toast.error("Veuillez sélectionner une note entre 1 et 5.", {
-        className: style.errorMessage,
-      });
+      toast.error("Veuillez sélectionner une note entre 1 et 5.")
       return;
     }
 
@@ -57,18 +51,14 @@ const AddReview = ({ courseId, onReviewAdded, hasPaid }) => {
         rating: Number(rating),
       });
 
-      toast.success("Avis ajouté avec succès!", {
-        className: style.successMessage,
-      });
+      // toast.success("Avis ajouté avec succès!")
       onReviewAdded({ comment, rating: Number(rating), user: user._id });
       setRating("");
       setComment("");
       setHasReviewed(true);
     } catch (error) {
       console.error("Erreur lors de l'envoi de l'avis:", error);
-      toast.error("Impossible d'envoyer l'avis", {
-        className: style.errorMessage,
-      });
+      toast.error("Impossible d'envoyer l'avis")
     }
   };
 
@@ -97,7 +87,7 @@ const AddReview = ({ courseId, onReviewAdded, hasPaid }) => {
               required
             />
           </div>
-          <button className="button" type="submit">
+          <button className={style.form__button} type="submit">
             Laisser un avis
           </button>
         </form>

@@ -3,7 +3,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import style from "./Slider.module.scss";
 
-// Custom arrow components
 const NextArrow = (props) => {
   const { className, style, onClick } = props;
   return (
@@ -38,12 +37,21 @@ function Slide() {
     prevArrow: <PrevArrow />,
     responsive: [
       {
-        breakpoint: 992,
+        breakpoint: 992, 
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToScroll: 2, 
           infinite: true,
-          dots: true,
+          dots: true, 
+        },
+      },
+      {
+        breakpoint: 576, 
+        settings: {
+          slidesToShow: 1, 
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true, 
         },
       },
     ],

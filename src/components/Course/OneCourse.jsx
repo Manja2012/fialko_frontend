@@ -56,21 +56,27 @@ const OneCourse = () => {
       setHasPaid(false);
     }
   };
-  const addToCartHandler = () => {
-    if (!user) {
-      notifyError("Vous devez vous connecter pour ajouter un cours");
-      return;
-    }
 
-    const isCourseInCart = cart.some((item) => item._id === course._id);
-    if (isCourseInCart) {
-      notifyError("Ce cours est déjà dans le panier");
-    } else {
-      addToCart(course);
-      notifySuccess("Le cours a été ajouté au panier avec succès");
-      
+  const addToCartHandler = async () => {
+    try {
+      if (!user) {
+        notifyError("Vous devez vous connecter pour ajouter un cours");
+        return;
+      }
+
+      const isCourseInCart = cart.some((item) => item._id === course._id);
+      if (isCourseInCart) {
+        notifyError("Ce cours est déjà dans le panier");
+      } else {
+      await addToCart(course);
+        notifySuccess("Le cours a été ajouté au panier avec succès");
+      }
+    } catch (error) {
+      console.error("Erreur lors de l'ajout au panier :", error);
+      notifyError("Une erreur est survenue lors de l'ajout au panier");
     }
   };
+
 
   const handleDeleteCourse = async () => {
     if (window.confirm("Êtes-vous sûr de vouloir supprimer ce cours?")) {
@@ -97,7 +103,7 @@ const OneCourse = () => {
           ...prevCourse,
           review: prevCourse.review.filter((review) => review._id !== reviewId),
         }));
-        notifySuccess("L'avis a été supprimé avec succès");
+        // notifySuccess("L'avis a été supprimé avec succès");
       } catch (error) {
         console.error("Erreur lors de la suppression de l'avis:", error);
         notifyError("Erreur lors de la suppression de l'avis");
@@ -115,7 +121,12 @@ const OneCourse = () => {
 
   return (
     <>
-      <ToastContainer />
+      <ToastContainer
+        autoClose={5000} 
+        closeOnClick
+        pauseOnHover
+        draggable
+      />
       <main className="container section">
         <div className={`${style.courseDetail} ${style.singleCard}`}>
           <div>
