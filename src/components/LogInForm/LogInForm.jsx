@@ -24,15 +24,31 @@ const LogInForm = () => {
         navigate("/profile");
       }
     } catch (error) {
-      toast.error("Email ou mot de passe incorrect", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      // Если ошибка вызвана превышением лимита попыток
+      if (error.response && error.response.status === 429) {
+        toast.error(
+          "Trop de tentatives échouées. Veuillez réessayer plus tard.",
+          {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          }
+        );
+      } else {
+        toast.error("Email ou mot de passe incorrect", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
     }
   };
 
