@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
+
 import { useCart } from "../contexts/сardContext";
-import style from "../components/ContactsForm/ContactsForm.module.scss"; 
+import style from "../components/ContactsForm/ContactsForm.module.scss";
 
 const SuccessPage = () => {
   const navigate = useNavigate();

@@ -53,7 +53,7 @@ describe("CourseCard", () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByText(course.content)).toBeInTheDocument(); // Проверка overlay
+    expect(screen.getByText(course.content)).toBeInTheDocument(); 
   });
 
   it("should not display overlay text when showOverlay is false", () => {
