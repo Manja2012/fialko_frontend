@@ -94,8 +94,8 @@ const AddReview = ({ courseId, onReviewAdded, hasPaid }) => {
       ) : (
         <p>
           {hasReviewed
-            ? "Vous avez déjà laissé un avis"
-            : "Payez le cours pour laisser un avis"}
+            ? ""
+            : ""}
         </p>
       )}
       <ToastContainer />

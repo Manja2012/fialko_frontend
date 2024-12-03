@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import Logo from "/public/images/logo.svg";
+import Logo from "/images/logo.svg";
 import { GrClose, GrMenu } from "react-icons/gr";
 import style from "./Header.module.scss";
 
@@ -78,7 +78,6 @@ const Header = () => {
           </nav>
         </div>
 
-        {/* Логин и регистрация в десктопной версии */}
         <ul
           className={`${style.nav} ${style.nav__margin} ${style.desktop_only}`}
         >
@@ -94,7 +93,6 @@ const Header = () => {
           </li>
         </ul>
 
-        {/* Логин и регистрация в мобильной версии */}
         <div className={style.mobile_links}>
           <Link className={style.nav__link} to="/register">
             s’inscrire

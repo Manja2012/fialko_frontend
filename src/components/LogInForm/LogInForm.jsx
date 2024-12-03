@@ -24,7 +24,7 @@ const LogInForm = () => {
         navigate("/profile");
       }
     } catch (error) {
-      // Если ошибка вызвана превышением лимита попыток
+    
       if (error.response && error.response.status === 429) {
         toast.error(
           "Trop de tentatives échouées. Veuillez réessayer plus tard.",
