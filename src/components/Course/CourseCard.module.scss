@@ -79,7 +79,7 @@
     max-width: 450px;
 
     @media screen and (min-width: 768px) and (max-width: 1199px) {
-      width: 50%;
+      // width: 50%;
       margin: 15px;
       flex-basis: calc((100% - 4 * 15px) / 2);
     }
@@ -140,7 +140,7 @@
 //one course
 
 .singleCard {
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1200px) {
     display: flex;
     align-items: flex-start;
     gap: 20px;
@@ -244,7 +244,7 @@
 }
 
 .star {
-  color: #ffb400; // Золотой цвет для звезд
+  color: #ffb400;
   margin-right: 2px;
 }
 
@@ -255,15 +255,15 @@
 //basket
 
 .cartCard {
+   @media screen and (min-width: 768px) {
   display: flex;
-  // align-items: center;
-  // justify-content: space-between;
   margin: 10px 0;
   padding: 10px;
-
   transition: none;
   box-shadow: none;
-  text-align: left;
+  text-align: left;   
+  }
+
 
   &:hover {
     transform: none;
@@ -278,6 +278,11 @@
 }
 
   &__image {
+    padding: 10px;
+ margin-left: 60px;
+    @media screen and (min-width: 768px) {
+   margin-left: 0;
+  }
   width: 100%;
   height: 100%;
   object-fit: cover;

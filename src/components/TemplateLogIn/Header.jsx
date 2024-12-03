@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import Logo from "/public/images/logo.svg";
+import Logo from "/images/logo.svg";
 import { GrClose, GrMenu } from "react-icons/gr";
 import { FaShoppingBasket } from "react-icons/fa";
 import LogoutButton from "../LogoutButton/LogoutButton";

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getCourseById, updateCourse } from "../../api/api-client";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import style from "../ContactsForm/ContactsForm.module.scss";
 
@@ -30,7 +30,7 @@ const UpdateCourse = () => {
         price: data.price,
       });
     } catch (error) {
-      toast.error("Erreur lors de la récupération du cours", {
+      toast.error("Erreur lors de la récupération du cours.", {
         className: style.errorMessage,
       });
     }
@@ -62,19 +62,27 @@ const UpdateCourse = () => {
 
     try {
       await updateCourse(formData, id);
-      toast.success("Le cours a été mis à jour avec succès !", {
-        className: style.successMessage,
-      });
-      navigate(`/courses/${id}`);
+      toast.success("Le cours a été modifié avec succès !");
+      setTimeout(() => navigate(`/courses/${id}`), 2000); 
     } catch (error) {
-      toast.error("Erreur lors de la mise à jour du cours", {
-        className: style.errorMessage,
-      });
+      toast.error("Erreur lors de la mise à jour du cours.");
     }
   };
 
   return (
     <div className="container">
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        className={style.toastContainer}
+      />
       <h2 className="title">Modifier le cours</h2>
       <form onSubmit={handleSubmit} className="form">
         <label className={style.form__label} htmlFor="name">

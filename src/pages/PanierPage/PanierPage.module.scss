@@ -1,26 +1,37 @@
 .cartCard__removeButton {
+  margin-bottom: 20px;
   background-color: #ff4d4d;
   border: none;
   border-radius: 12px;
   padding: 5px 12px;
   color: white;
   cursor: pointer;
-  font-size:14px;
+  font-size: 14px;
   margin-top: 5px;
+  @media screen and (min-width: 768px) {
+    margin-bottom: 0;
+  }
 }
 
 .cartCard__removeButton:hover {
   background-color: #d44242;
 }
-.cartCard__item{
+.cartCard__item {
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eeeeee;
+  @media screen and (min-width: 768px) {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom:1px solid #eeeeee;
+  }
 }
-.cartCard__text{
-    padding: 60px;
-    font-size: 1.5rem;
-    color: var(--text-color);
-    text-align: center;
+.cartCard__text {
+  padding: 60px;
+  font-size: 1.5rem;
+  color: var(--text-color);
+  text-align: center;
+}
+.button{
+display: block;
+  margin: 0 auto; /* Горизонтальное центрирование */
+  padding: 10px 20px;
 }

@@ -1,6 +1,7 @@
 import { StrictMode, useState } from "react";
 import { sendMessage } from "../../api/api-client.js";
 import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom"; // Импорт navigate
 import Img from "/images/profil2.webp";
 import "react-toastify/dist/ReactToastify.css";
 import style from "./ContactsForm.module.scss";
@@ -10,28 +11,18 @@ const ContactsForm = () => {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const navigate = useNavigate(); // Инициализация navigate
 
   const notify = () =>
-    toast.error(`S'il vous plaît, remplissez le champ de texte`, {
-      className: style.errorMessage,
-    });
+    toast.error(`S'il vous plaît, remplissez le champ de texte`);
   const confirmation = () =>
-    toast.success(`Votre message a été envoyé avec succès`, {
-      className: style.successMessage,
-    });
+    toast.success(`Votre message a été envoyé avec succès`);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    event.currentTarget.reset();
     if (!message.trim()) {
       notify();
     } else {
-      console.log({
-        email,
-        name,
-        phone,
-        message,
-      });
       try {
         await sendMessage({
           email,
@@ -39,13 +30,16 @@ const ContactsForm = () => {
           phone,
           message,
         });
-        /*
+        confirmation();
+
+        // Очистка формы
         setName("");
         setEmail("");
         setMessage("");
         setPhone("");
-        */
-        confirmation();
+
+        // Переход на главную страницу
+        setTimeout(() => navigate(`/`), 2000);
       } catch (error) {
         console.warn(error);
       }
@@ -67,6 +61,7 @@ const ContactsForm = () => {
               type="text"
               name="name"
               id="name"
+              value={name} // Добавлено значение
               onChange={(event) => setName(event.target.value)}
             />
             <label className={style.form__label} htmlFor="email">
@@ -78,6 +73,7 @@ const ContactsForm = () => {
               type="email"
               name="email"
               id="email"
+              value={email} // Добавлено значение
               onChange={(event) => setEmail(event.target.value)}
             />
             <label className={style.form__label} htmlFor="phone">
@@ -89,6 +85,7 @@ const ContactsForm = () => {
               type="tel"
               name="phone"
               id="phone"
+              value={phone} // Добавлено значение
               onChange={(event) => setPhone(event.target.value)}
             />
             <div>
@@ -101,13 +98,15 @@ const ContactsForm = () => {
                 id="message"
                 cols="30"
                 rows="10"
-                value={message}
+                value={message} // Добавлено значение
                 onChange={(event) => setMessage(event.target.value)}
               ></textarea>
             </div>
             <p className={style.form__text_star}>*champs obligatoire</p>
             <div>
-              <button className={style.form__button}>Ok</button>
+              <button type="submit" className={style.form__button}>
+                Ok
+              </button>
             </div>
           </form>
         </div>
@@ -119,7 +118,18 @@ const ContactsForm = () => {
           />
         </div>
       </section>
-      <ToastContainer position="bottom-center" theme="dark" />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        className={style.toastContainer}
+      />
     </StrictMode>
   );
 };

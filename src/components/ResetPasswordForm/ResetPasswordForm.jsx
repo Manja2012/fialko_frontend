@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom"; // Импорт useNavigate
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { resetPassword } from "../../api/api-client"; 
+import { resetPassword } from "../../api/api-client";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import style from "../ContactsForm/ContactsForm.module.scss"; 
+import style from "../ContactsForm/ContactsForm.module.scss";
 
 const schema = yup.object().shape({
   newPassword: yup
@@ -19,7 +19,8 @@ const schema = yup.object().shape({
 
 const ResetPasswordForm = () => {
   const [searchParams] = useSearchParams();
-  const token = searchParams.get("token"); 
+  const token = searchParams.get("token");
+  const navigate = useNavigate(); // Инициализация navigate
   const [showPassword, setShowPassword] = useState(false);
   const {
     register,
@@ -31,11 +32,16 @@ const ResetPasswordForm = () => {
 
   const onSubmit = async (data) => {
     try {
-      await resetPassword(token, data.newPassword); 
+      await resetPassword(token, data.newPassword);
       toast.success("Mot de passe réinitialisé avec succès !", {
         position: "top-right",
         autoClose: 5000,
       });
+
+      // Перенаправление на страницу логина
+      setTimeout(() => {
+        navigate("/log-in");
+      }, 2000); // Добавляем небольшую задержку, чтобы пользователь мог увидеть сообщение
     } catch (error) {
       const errorMessage =
         error.response?.data?.message ||

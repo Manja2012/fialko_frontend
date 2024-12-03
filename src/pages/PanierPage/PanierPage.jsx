@@ -43,7 +43,7 @@ const Panier = () => {
                 ))}
               </ul>
               <p>Coût total : {total} €</p>
-              <Link className="link" to="/paiement">
+              <Link className={style.button} to="/paiement">
                 <button className="button">Payer</button>
               </Link>
             </>
