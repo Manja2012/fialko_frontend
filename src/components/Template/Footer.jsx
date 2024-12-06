@@ -39,13 +39,13 @@ const Footer = () => {
               </Link>
             </li>
             <li className={style.footer__item}>
-              <Link className={style.footer__link} to="/mention-legales">
+              <Link className={style.footer__link} to="/legalnotice">
                 Mention legales
               </Link>
             </li>
             <li className={style.footer__item}>
-              <Link className={style.footer__link} to="/cgu">
-                CGU
+              <Link className={style.footer__link} to="/rgpd">
+                RGPD
               </Link>
             </li>
           </ul>
