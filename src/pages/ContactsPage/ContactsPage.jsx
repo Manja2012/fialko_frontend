@@ -1,16 +1,15 @@
-import ContactsForm from '../../components/ContactsForm/ContactsForm'
-// import { Helmet } from 'react-helmet';
+import ContactsForm from "../../components/ContactsForm/ContactsForm";
+import { Helmet } from "react-helmet";
 
-const ContactsPage = () =>{  
-
-  return(
+const ContactsPage = () => {
+  return (
     <>
-      {/* <Helmet>
+      <Helmet>
         <title>Page contacts</title>
         <meta name="description" content=" Appelez-nous !" />
-      </Helmet> */}
-      <ContactsForm/>
+      </Helmet>
+      <ContactsForm />
     </>
-  )
-}
+  );
+};
 export default ContactsPage;

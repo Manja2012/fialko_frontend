@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { useCart } from "../../contexts/сardContext";
 import CourseCard from "../../components/Course/CourseCard";
+import { Helmet } from "react-helmet";
+
 import style from "./PanierPage.module.scss";
 
 const Panier = () => {
@@ -8,6 +10,13 @@ const Panier = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Mon panier - École de coloration en ligne</title>
+        <meta
+          name="description"
+          content="Consultez les cours dans votre panier et procédez au paiement en ligne."
+        />
+      </Helmet>
       <section className="section">
         <div className="container">
           {cart.length === 0 ? (

@@ -38,22 +38,24 @@ const StripeCheckout = () => {
   };
 
   return (
-    <div className={style.form}>
-      <form onSubmit={handleCheckout}>
-        <input
-          className={style.form__input}
-          type="email"
-          name="email"
-          id="email"
-          onChange={(event) => setEmail(event.target.value)}
-          placeholder="Email"
-          value={email}
-          required
-        />
-        <button className="button" type="submit">
-          Checkout
-        </button>
-      </form>
+    <div className="container">
+      <div className={style.form}>
+        <form onSubmit={handleCheckout}>
+          <input
+            className={style.form__input}
+            type="email"
+            name="email"
+            id="email"
+            onChange={(event) => setEmail(event.target.value)}
+            placeholder="Email"
+            value={email}
+            required
+          />
+          <button className="button" type="submit">
+            Checkout
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

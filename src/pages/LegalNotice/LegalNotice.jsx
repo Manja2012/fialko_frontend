@@ -1,10 +1,13 @@
-
+import { Helmet } from "react-helmet";
 import style from "./LegalNotice.module.scss";
-
 
 const LegalNotice = () => {
   return (
     <>
+      <Helmet>
+        <title>Page Mentions légales</title>
+        <meta name="description" content="Mentions légales" />
+      </Helmet>
       <section className="section">
         <div className="container">
           <h1 className="title"> Mentions légale</h1>
