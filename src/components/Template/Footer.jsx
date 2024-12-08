@@ -2,14 +2,12 @@ import { Link } from "react-router-dom";
 import { BsFacebook } from "react-icons/bs";
 import { BsInstagram } from "react-icons/bs";
 import { BsTelegram } from "react-icons/bs";
-import style from './Footer.module.scss';
+import style from "./Footer.module.scss";
 
 const Footer = () => {
-
   return (
     <footer>
       <section className={style.footer}>
-        {/* <h2 className={css.hidden}>footer</h2> */}
         <div className={style.footer__list}>
           <ul>
             <li className={style.footer__title}>Plan du Site</li>
@@ -28,11 +26,7 @@ const Footer = () => {
                 Photos
               </Link>
             </li>
-            {/* <li className={style.footer__item}>
-              <Link className={style.footer__link} to="/faq">
-                FAQ
-              </Link>
-            </li> */}
+
             <li className={style.footer__item}>
               <Link className={style.footer__link} to="/contacts">
                 Contacts
@@ -70,5 +64,5 @@ const Footer = () => {
       </section>
     </footer>
   );
-}
+};
 export default Footer;

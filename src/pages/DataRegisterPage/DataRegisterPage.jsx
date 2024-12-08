@@ -1,10 +1,17 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import style from "./DataRegisterPage.module.scss";
-
 
 const DataRegisterPage = () => {
   return (
     <>
+      <Helmet>
+        <title>Registre de traitement des données personnelles</title>
+        <meta
+          name="description"
+          content="Découvrez le registre complet du traitement des données personnelles de l'École de coloration en ligne par Maria Fialko."
+        />
+      </Helmet>
       <section className="section">
         <div className="container">
           <h1 className="title">

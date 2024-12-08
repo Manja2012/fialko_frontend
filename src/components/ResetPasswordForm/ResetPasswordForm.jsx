@@ -38,10 +38,9 @@ const ResetPasswordForm = () => {
         autoClose: 5000,
       });
 
-      // Перенаправление на страницу логина
       setTimeout(() => {
         navigate("/log-in");
-      }, 2000); // Добавляем небольшую задержку, чтобы пользователь мог увидеть сообщение
+      }, 2000);
     } catch (error) {
       const errorMessage =
         error.response?.data?.message ||
